@@ -6,10 +6,10 @@ const useStyles = makeStyles((theme: Theme) =>
       padding: 0,
     },
     title: {
-      height: theme.spacing(6)
+      height: theme.spacing(6),
     },
     content: {
-        flexGrow: 1,
+      flexGrow: 1,
     },
     search: {
       position: "relative",

@@ -1,9 +1,11 @@
 import React from "react";
 import ReactDOM from "react-dom";
 import { BrowserRouter } from "react-router-dom";
+import { Provider } from "react-redux";
 import { createTheme, CssBaseline, ThemeProvider } from "@material-ui/core";
 import { deepPurple } from "@material-ui/core/colors";
 
+import store from "./store";
 import App from "./App";
 import { globalStyle } from "./index.style";
 import reportWebVitals from "./reportWebVitals";
@@ -22,12 +24,14 @@ const theme = createTheme({
 
 ReactDOM.render(
   <React.StrictMode>
-    <ThemeProvider theme={theme}>
-      <CssBaseline />
-      <BrowserRouter>
-        <App />
-      </BrowserRouter>
-    </ThemeProvider>
+    <Provider store={store}>
+      <ThemeProvider theme={theme}>
+        <CssBaseline />
+        <BrowserRouter>
+          <App />
+        </BrowserRouter>
+      </ThemeProvider>
+    </Provider>
   </React.StrictMode>,
   document.getElementById("root")
 );

@@ -1,25 +1,45 @@
+import { Link } from "react-router-dom";
 import {
   AppBar,
   Container,
   IconButton,
   InputBase,
   Toolbar,
+  useTheme,
 } from "@material-ui/core";
 import { Menu as MenuIcon, Search as SearchIcon } from "@material-ui/icons";
 
-import logo from "../../../../Images/logo.svg";
+import { useAppDispatch } from "../../../../store";
+import { toggleMenu } from "../../../../store/features/settings/index.slice";
+import ROUTES from "../../../../routes/constants";
+import logo from "../../../../images/logo.svg";
 import useStyles from "./index.style";
+import { useMediaQuery } from "@material-ui/core";
 
 const UserHeader = () => {
   const classes = useStyles();
+  const rdxDispatch = useAppDispatch();
+
+  const { breakpoints } = useTheme();
+  const matches = useMediaQuery(breakpoints.down("xs"));
+  console.log(matches);
   return (
     <AppBar position="fixed">
       <Container maxWidth="lg" className={classes.root}>
         <Toolbar>
-          <IconButton edge="start" color="inherit" aria-label="open drawer">
-            <MenuIcon />
-          </IconButton>
-          <img src={logo} alt="logo" className={classes.title} />
+          {matches && (
+            <IconButton
+              edge="start"
+              color="inherit"
+              aria-label="open drawer"
+              onClick={() => rdxDispatch(toggleMenu())}
+            >
+              <MenuIcon />
+            </IconButton>
+          )}
+          <Link to={ROUTES.user.home.path}>
+            <img src={logo} alt="logo" className={classes.title} />
+          </Link>
           <div className={classes.content}></div>
           <div className={classes.search}>
             <div className={classes.searchIcon}>
