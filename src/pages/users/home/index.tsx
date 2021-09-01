@@ -1,5 +1,15 @@
+import Wrapper from "../components/Wrapper";
+import FeatureProducts from "./components/feature-products";
+// import useStyles from "./index.style";
+
 const Home = () => {
-  return <div>Home</div>;
+  // const classes = useStyles();
+  return (
+    <Wrapper sideChild={"sliders"}>
+      <FeatureProducts />
+    </Wrapper>
+  );
 };
 
+Home.displayName = "Home";
 export default Home;

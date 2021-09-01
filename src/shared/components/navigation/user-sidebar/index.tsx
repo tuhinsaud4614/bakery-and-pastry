@@ -9,6 +9,7 @@ import { NavLink } from "react-router-dom";
 
 import { useAppDispatch, useAppSelector } from "../../../../store";
 import { toggleMenu } from "../../../../store/features/settings/index.slice";
+import { CATEGORIES } from "../../../constants";
 import useStyles from "./index.style";
 
 const Content = () => {
@@ -19,31 +20,17 @@ const Content = () => {
         Categories
       </Typography>
       <ul className={classes.items}>
-        <li>
-          <NavLink to="/abc" className={classes.item} exact>
-            Pastry, Cup Pastry & Tart
-          </NavLink>
-        </li>
-        <li>
-          <NavLink to="/xyz" className={classes.item} exact>
-            Cake
-          </NavLink>
-        </li>
-        <li>
-          <NavLink to="/cc" className={classes.item} exact>
-            Sweets
-          </NavLink>
-        </li>
-        <li>
-          <NavLink to="/b" className={classes.item} exact>
-            Biscuits & Toast
-          </NavLink>
-        </li>
-        <li>
-          <NavLink to="/" className={classes.item} exact>
-            Others
-          </NavLink>
-        </li>
+        {CATEGORIES.map((category) => (
+          <li key={category.slug}>
+            <NavLink
+              to={`/category/${category.slug}`}
+              className={classes.item}
+              exact
+            >
+              {category.name}
+            </NavLink>
+          </li>
+        ))}
       </ul>
     </Box>
   );

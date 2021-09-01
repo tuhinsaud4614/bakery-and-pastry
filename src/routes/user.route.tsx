@@ -11,11 +11,11 @@ import {
 
 import ROUTES from "./constants";
 import UserHeader from "../shared/components/navigation/user-header";
-import UserSidebar from "../shared/components/navigation/user-sidebar";
 import PageNotFound from "../pages/page-not-found";
 
 const Home = lazy(() => import("../pages/users/home"));
 const Search = lazy(() => import("../pages/users/search"));
+const Category = lazy(() => import("../pages/users/category"));
 
 const Loader = () => {
   return (
@@ -31,22 +31,20 @@ const UserRoutes = () => {
     <Suspense fallback={<Loader />}>
       <UserHeader />
       <Container maxWidth="lg" className={classes.container}>
-        <Box display="flex">
-          <UserSidebar />
-          <Box component="main" flexGrow="1">
-            <Switch>
-              <Route path={ROUTES.user.search.path} exact>
-                <Search />
-              </Route>
-              <Route path={ROUTES.user.home.path} exact>
-                <Home />
-              </Route>
-              <Route>
-                <PageNotFound path={ROUTES.user.home.path} />
-              </Route>
-            </Switch>
-          </Box>
-        </Box>
+        <Switch>
+          <Route path={ROUTES.user.search.path} exact>
+            <Search />
+          </Route>
+          <Route path={ROUTES.user.category.path} exact>
+            <Category />
+          </Route>
+          <Route path={ROUTES.user.home.path} exact>
+            <Home />
+          </Route>
+          <Route>
+            <PageNotFound path={ROUTES.user.home.path} />
+          </Route>
+        </Switch>
       </Container>
     </Suspense>
   );
@@ -60,4 +58,5 @@ const useStyles = makeStyles((theme: Theme) =>
   })
 );
 
+UserRoutes.displayName = "User.Routes";
 export default UserRoutes;

@@ -22,7 +22,6 @@ const UserHeader = () => {
 
   const { breakpoints } = useTheme();
   const matches = useMediaQuery(breakpoints.down("xs"));
-  console.log(matches);
   return (
     <AppBar position="fixed">
       <Container maxWidth="lg" className={classes.root}>
