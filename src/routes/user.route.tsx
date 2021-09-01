@@ -12,6 +12,7 @@ import {
 import ROUTES from "./constants";
 import UserHeader from "../shared/components/navigation/user-header";
 import PageNotFound from "../pages/page-not-found";
+import UserFooter from "../shared/components/navigation/user-footer";
 
 const Home = lazy(() => import("../pages/users/home"));
 const Search = lazy(() => import("../pages/users/search"));
@@ -46,6 +47,7 @@ const UserRoutes = () => {
           </Route>
         </Switch>
       </Container>
+      <UserFooter />
     </Suspense>
   );
 };
