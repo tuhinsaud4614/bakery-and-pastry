@@ -5,6 +5,13 @@ const useStyles = makeStyles((theme: Theme) =>
     root: {
       marginTop: theme.spacing(),
     },
+    sideChild: {
+      height: "226px",
+      paddingLeft: theme.spacing(),
+    },
+    sliders: {
+      height: "100%",
+    },
   })
 );
 

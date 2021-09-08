@@ -7,7 +7,6 @@ import {
 } from "@material-ui/core";
 import { Facebook, Instagram, Twitter } from "@material-ui/icons";
 import classNames from "classnames";
-
 import useStyles from "./index.style";
 
 const UserFooter = () => {
@@ -15,7 +14,7 @@ const UserFooter = () => {
   return (
     <Box className={classes.root}>
       <Container maxWidth="lg">
-        <Typography variant="h6" color="secondary" gutterBottom>
+        <Typography variant="h6" component="h3" color="secondary" gutterBottom>
           Stay with{" "}
           <a href="https://m.facebook.com/" className={classes.link}>
             <b>Sarkar Bakery & Pastry</b>
@@ -81,18 +80,21 @@ const UserFooter = () => {
         </Box>
         <Box display="flex" alignItems="center">
           <IconButton
+            aria-label="facebook"
             href="https://m.facebook.com/"
             className={classNames(classes.btn, classes.fbBtn)}
           >
             <Facebook />
           </IconButton>
           <IconButton
+            aria-label="twitter"
             href="https://m.facebook.com/"
             className={classNames(classes.btn, classes.twBtn)}
           >
             <Twitter />
           </IconButton>
           <IconButton
+            aria-label="instagram"
             href="https://m.facebook.com/"
             className={classNames(classes.btn, classes.inBtn)}
           >

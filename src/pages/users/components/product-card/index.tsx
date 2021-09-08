@@ -7,7 +7,6 @@ import {
   Typography,
 } from "@material-ui/core";
 import { Link, useHistory } from "react-router-dom";
-
 import useStyles from "./index.style";
 
 interface Props {

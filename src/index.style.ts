@@ -1,15 +1,29 @@
-import Raleway from "./fonts/Raleway/RalewayVariable.ttf";
-import RalewayItalic from "./fonts/Raleway/RalewayItalicVariable.ttf";
+import RalewayBold from "./fonts/Raleway/Raleway-Bold.ttf";
+import RalewayItalic from "./fonts/Raleway/Raleway-Italic.ttf";
+import RalewayMedium from "./fonts/Raleway/Raleway-Medium.ttf";
+import RalewayRegular from "./fonts/Raleway/Raleway-Regular.ttf";
 
-const raleway = {
+const ralewayRegular = {
   fontFamily: "Raleway",
-  src: `url(${Raleway}) format('truetype')`,
+  src: `local('Raleway-Regular'), url(${RalewayRegular}) format('truetype')`,
+  fontStyle: "normal",
+};
+
+const ralewayBold = {
+  fontFamily: "Raleway",
+  src: `local('Raleway-Bold'), url(${RalewayBold}) format('truetype')`,
+  fontStyle: "normal",
+};
+
+const ralewayMedium = {
+  fontFamily: "Raleway",
+  src: `local('Raleway-Medium'), url(${RalewayMedium}) format('truetype')`,
   fontStyle: "normal",
 };
 
 const ralewayItalic = {
   fontFamily: "Raleway",
-  src: `url(${RalewayItalic}) format('truetype')`,
+  src: `local('Raleway-Italic'), url(${RalewayItalic}) format('truetype')`,
   fontStyle: "italic",
 };
 
@@ -21,7 +35,7 @@ const globalSelectorStyle = {
 
 export const globalStyle = {
   "@global": {
-    "@font-face": [raleway, ralewayItalic],
+    "@font-face": [ralewayRegular, ralewayBold, ralewayMedium, ralewayItalic],
     "*": {
       ...globalSelectorStyle,
       "&::after": globalSelectorStyle,
