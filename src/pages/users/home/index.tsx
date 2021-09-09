@@ -5,14 +5,6 @@ import CategorizedProducts from "./components/categorized-products";
 import FeatureProducts from "./components/feature-products";
 import useStyles from "./index.style";
 
-const list = [
-  "https://material-ui.com/static/images/image-list/burgers.jpg",
-  "https://material-ui.com/static/images/image-list/breakfast.jpg",
-  "https://material-ui.com/static/images/image-list/vegetables.jpg",
-  "https://material-ui.com/static/images/cards/paella.jpg",
-  "https://material-ui.com/static/images/image-list/olive.jpg",
-];
-
 const Home = () => {
   const classes = useStyles();
   return (
@@ -20,8 +12,16 @@ const Home = () => {
       sideChild={
         <div className={classes.sideChild}>
           <Carousel classes={{ root: classes.sliders }} autoplay paginate>
-            {list.map((li, i) => (
-              <img key={i} src={li} alt="ok" title="ok" />
+            {CATEGORIES.map((category, i) => (
+              <img
+                width="150"
+                height="150"
+                key={category.slug}
+                src={category.src}
+                srcSet={category.srcSet}
+                alt={category.name}
+                title={category.name}
+              />
             ))}
           </Carousel>
         </div>

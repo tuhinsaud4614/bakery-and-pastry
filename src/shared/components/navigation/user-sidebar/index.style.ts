@@ -3,7 +3,6 @@ import { createStyles, makeStyles, Theme } from "@material-ui/core";
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
     root: {
-      height: "max-content",
       [theme.breakpoints.up("sm")]: {
         border: `1px solid ${theme.palette.divider}`,
         width: theme.spacing(33),

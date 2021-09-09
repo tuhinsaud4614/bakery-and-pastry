@@ -5,8 +5,18 @@ const useStyles = makeStyles((theme: Theme) =>
     root: {
       padding: 0,
     },
+    titleLink: {
+      display: "inline-flex",
+      alignItems: "center",
+    },
     title: {
-      height: theme.spacing(6),
+      height: "auto",
+      width: theme.spacing(12),
+      marginRight: theme.spacing(1.5),
+      [theme.breakpoints.up("sm")]: {
+        width: "auto",
+        height: theme.spacing(6),
+      },
     },
     content: {
       flexGrow: 1,

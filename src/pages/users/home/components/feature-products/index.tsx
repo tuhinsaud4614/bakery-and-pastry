@@ -1,7 +1,6 @@
-import { useState } from "react";
 import { Box, Divider, Grid, Paper, Typography } from "@material-ui/core";
 import { Pagination } from "@material-ui/lab";
-
+import { useState } from "react";
 import { CATEGORIES } from "../../../../../shared/constants";
 import ProductCard from "../../../components/product-card";
 import useStyles from "./index.style";
@@ -21,7 +20,7 @@ const FeatureProducts = () => {
           <Grid key={category.slug} item xs={6} sm={4} md={3}>
             <ProductCard
               featured={true}
-              img="https://material-ui.com/static/images/cards/contemplative-reptile.jpg"
+              img={category.src}
               category={category.name}
               slug={category.slug}
               title="BLUEBERRY CUP"

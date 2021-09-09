@@ -1,20 +1,19 @@
-import { Link } from "react-router-dom";
 import {
   AppBar,
   Container,
   IconButton,
   InputBase,
   Toolbar,
+  useMediaQuery,
   useTheme,
 } from "@material-ui/core";
 import { Menu as MenuIcon, Search as SearchIcon } from "@material-ui/icons";
-
+import { Link } from "react-router-dom";
+import logo from "../../../../images/logo.svg";
+import ROUTES from "../../../../routes/constants";
 import { useAppDispatch } from "../../../../store";
 import { toggleMenu } from "../../../../store/features/settings/index.slice";
-import ROUTES from "../../../../routes/constants";
-import logo from "../../../../images/logo.svg";
 import useStyles from "./index.style";
-import { useMediaQuery } from "@material-ui/core";
 
 const UserHeader = () => {
   const classes = useStyles();
@@ -36,8 +35,14 @@ const UserHeader = () => {
               <MenuIcon />
             </IconButton>
           )}
-          <Link to={ROUTES.user.home.path}>
-            <img src={logo} alt="logo" className={classes.title} />
+          <Link to={ROUTES.user.home.path} className={classes.titleLink}>
+            <img
+              src={logo}
+              alt="logo"
+              className={classes.title}
+              width="100"
+              height="48"
+            />
           </Link>
           <div className={classes.content}></div>
           <div className={classes.search}>

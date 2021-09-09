@@ -12,7 +12,7 @@ const Wrapper = ({ hideSidebar = false, children, sideChild }: Props) => {
   return (
     <>
       <Box display="flex">
-        {!hideSidebar && <UserSidebar />}
+        <UserSidebar hide={hideSidebar} />
         {sideChild && (
           <Box component="div" flexGrow="1">
             {sideChild}

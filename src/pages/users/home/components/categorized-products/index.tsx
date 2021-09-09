@@ -1,5 +1,4 @@
 import { Box, Grid, Typography } from "@material-ui/core";
-
 import { CATEGORIES } from "../../../../../shared/constants";
 import ProductCard from "../../../components/product-card";
 import useStyles from "./index.style";
@@ -20,7 +19,7 @@ const CategorizedProducts = ({ title, slug }: Props) => {
         {CATEGORIES.map((category) => (
           <Grid key={category.slug} item xs={6} sm={4} md={3}>
             <ProductCard
-              img="https://material-ui.com/static/images/cards/paella.jpg"
+              img={category.src}
               category={title}
               slug={slug}
               title="BLUEBERRY CUP"

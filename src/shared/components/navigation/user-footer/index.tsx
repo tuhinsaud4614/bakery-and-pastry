@@ -16,7 +16,11 @@ const UserFooter = () => {
       <Container maxWidth="lg">
         <Typography variant="h6" component="h3" color="secondary" gutterBottom>
           Stay with{" "}
-          <a href="https://m.facebook.com/" className={classes.link}>
+          <a
+            href="https://m.facebook.com/"
+            className={classes.link}
+            aria-label="facebook-page"
+          >
             <b>Sarkar Bakery & Pastry</b>
           </a>
         </Typography>
@@ -70,7 +74,11 @@ const UserFooter = () => {
               >
                 EMAIL:
               </Typography>
-              <a href="mailto:acd@gamil.com" className={classes.addressText}>
+              <a
+                href="mailto:acd@gamil.com"
+                className={classes.addressText}
+                aria-label="mail"
+              >
                 <Typography variant="caption" component="span">
                   acd@gamil.com
                 </Typography>

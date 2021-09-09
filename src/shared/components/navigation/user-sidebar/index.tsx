@@ -6,7 +6,6 @@ import {
   useTheme,
 } from "@material-ui/core";
 import { NavLink } from "react-router-dom";
-
 import { useAppDispatch, useAppSelector } from "../../../../store";
 import { toggleMenu } from "../../../../store/features/settings/index.slice";
 import { CATEGORIES } from "../../../constants";
@@ -36,7 +35,11 @@ const Content = () => {
   );
 };
 
-const UserSidebar = () => {
+interface Props {
+  hide?: boolean;
+}
+
+const UserSidebar = ({ hide = false }: Props) => {
   const { open } = useAppSelector((state) => state.settings.sidebar);
   const rdxDispatch = useAppDispatch();
 
@@ -47,9 +50,9 @@ const UserSidebar = () => {
     <Drawer anchor="left" open={open} onClose={() => rdxDispatch(toggleMenu())}>
       <Content />
     </Drawer>
-  ) : (
+  ) : !hide ? (
     <Content />
-  );
+  ) : null;
 };
 
 export default UserSidebar;

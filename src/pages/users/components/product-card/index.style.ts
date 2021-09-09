@@ -6,7 +6,7 @@ const useStyles = makeStyles((theme: Theme) =>
     root: {
       background: deepPurple[50],
       position: "relative",
-      height: "100%"
+      height: "100%",
     },
     featured: {
       position: "absolute",
@@ -30,7 +30,14 @@ const useStyles = makeStyles((theme: Theme) =>
       },
     },
     title: {
+      ...theme.typography.body2,
+      display: "block",
+      textDecoration: "none",
+      color: theme.palette.secondary.main,
       textTransform: "uppercase",
+      "&:hover": {
+        color: theme.palette.secondary.light,
+      },
     },
     price: {
       textTransform: "uppercase",

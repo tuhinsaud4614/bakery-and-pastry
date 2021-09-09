@@ -40,15 +40,22 @@ const ProductCard = ({
         />
       )}
       <CardActionArea onClick={() => push(`/category/${slug}`)}>
-        <CardMedia component="img" title={title} image={img} />
+        <CardMedia
+          component="img"
+          title={title}
+          image={img}
+          width={150}
+          height={100}
+          style={{ height: "auto" }}
+        />
       </CardActionArea>
       <CardContent className={classes.content}>
         <Link to={`/category/${slug}`} className={classes.category}>
           {category}
         </Link>
-        <Typography variant="body1" component="h2" className={classes.title}>
+        <Link to={`/category/${slug}`} className={classes.title}>
           {title}
-        </Typography>
+        </Link>
         <Typography variant="h6" component="h3" className={classes.price}>
           {price}৳
         </Typography>
