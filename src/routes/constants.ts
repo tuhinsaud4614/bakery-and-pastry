@@ -17,7 +17,7 @@ const ADMIN_ROUTES: AdminRouteType = {
 };
 
 // User routes
-type UserKeyType = "home" | "search" | "category";
+type UserKeyType = "home" | "search" | "category" | "product";
 type UserRouteType = { [key in UserKeyType]: DetailType };
 const USER_ROUTES: UserRouteType = {
   home: {
@@ -30,8 +30,12 @@ const USER_ROUTES: UserRouteType = {
   },
   category: {
     name: "Category",
-    path: "/category/:slug"
-  }
+    path: "/category/:slug",
+  },
+  product: {
+    name: "Category",
+    path: "/product/:id",
+  },
 };
 
 const ROUTES: { admin: AdminRouteType; user: UserRouteType } = {

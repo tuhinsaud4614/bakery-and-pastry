@@ -84,7 +84,7 @@ const CarouselComponent = ({
 
   useEffect(() => {
     const translateHandler = () => {
-      if (containerRef.current) {
+      if (containerRef.current && IS_ARRAY) {
         setTranslateX(containerRef.current.clientWidth * current);
       }
     };
@@ -103,7 +103,7 @@ const CarouselComponent = ({
 
   // autoplay carousel
   useEffect(() => {
-    if (autoplay) {
+    if (autoplay && IS_ARRAY) {
       if (interval) {
         clearInterval(interval);
       }
@@ -114,7 +114,7 @@ const CarouselComponent = ({
         clearInterval(interval);
       };
     }
-  }, [actionHandler, autoplay]);
+  }, [actionHandler, autoplay, IS_ARRAY]);
 
   // transitionend Effect
   useEffect(() => {

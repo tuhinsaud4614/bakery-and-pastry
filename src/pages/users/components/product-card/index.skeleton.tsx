@@ -8,9 +8,9 @@ const ProductCardSkeleton = () => {
     <Card className={styles.root}>
       <Skeleton height={155} variant="rect" />
       <Box p={2}>
-        <Skeleton width="30%" />
-        <Skeleton width="100%" />
-        <Skeleton width="40%" />
+        <Skeleton width="30%" animation="wave" />
+        <Skeleton width="100%" animation="wave" />
+        <Skeleton width="40%" animation="wave" />
       </Box>
     </Card>
   );

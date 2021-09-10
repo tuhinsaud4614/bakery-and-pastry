@@ -1,5 +1,3 @@
-import { lazy, Suspense } from "react";
-import { Route, Switch } from "react-router-dom";
 import {
   Box,
   CircularProgress,
@@ -8,11 +6,13 @@ import {
   makeStyles,
   Theme,
 } from "@material-ui/core";
-
-import ROUTES from "./constants";
-import UserHeader from "../shared/components/navigation/user-header";
+import { lazy, Suspense } from "react";
+import { Route, Switch } from "react-router-dom";
 import PageNotFound from "../pages/page-not-found";
+import ProductDetail from "../pages/users/product-detail";
 import UserFooter from "../shared/components/navigation/user-footer";
+import UserHeader from "../shared/components/navigation/user-header";
+import ROUTES from "./constants";
 
 const Home = lazy(() => import("../pages/users/home"));
 const Search = lazy(() => import("../pages/users/search"));
@@ -38,6 +38,9 @@ const UserRoutes = () => {
           </Route>
           <Route path={ROUTES.user.category.path} exact>
             <Category />
+          </Route>
+          <Route path={ROUTES.user.product.path} exact>
+            <ProductDetail />
           </Route>
           <Route path={ROUTES.user.home.path} exact>
             <Home />

@@ -39,7 +39,7 @@ const ProductCard = ({
           component="span"
         />
       )}
-      <CardActionArea onClick={() => push(`/category/${slug}`)}>
+      <CardActionArea onClick={() => push(`/product/${slug}`)}>
         <CardMedia
           component="img"
           title={title}
@@ -53,7 +53,7 @@ const ProductCard = ({
         <Link to={`/category/${slug}`} className={classes.category}>
           {category}
         </Link>
-        <Link to={`/category/${slug}`} className={classes.title}>
+        <Link to={`/product/${slug}`} className={classes.title}>
           {title}
         </Link>
         <Typography variant="h6" component="h3" className={classes.price}>
