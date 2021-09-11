@@ -1,15 +1,9 @@
-import {
-  Box,
-  CircularProgress,
-  Container,
-  createStyles,
-  makeStyles,
-  Theme,
-} from "@material-ui/core";
+import { Container, createStyles, makeStyles, Theme } from "@material-ui/core";
 import { lazy, Suspense } from "react";
 import { Route, Switch } from "react-router-dom";
 import PageNotFound from "../pages/page-not-found";
 import ProductDetail from "../pages/users/product-detail";
+import Loader from "../shared/components/loader";
 import UserFooter from "../shared/components/navigation/user-footer";
 import UserHeader from "../shared/components/navigation/user-header";
 import ROUTES from "./constants";
@@ -17,14 +11,6 @@ import ROUTES from "./constants";
 const Home = lazy(() => import("../pages/users/home"));
 const Search = lazy(() => import("../pages/users/search"));
 const Category = lazy(() => import("../pages/users/category"));
-
-const Loader = () => {
-  return (
-    <Box display="flex" justifyContent="center" marginTop="100px">
-      <CircularProgress />
-    </Box>
-  );
-};
 
 const UserRoutes = () => {
   const classes = useStyles();

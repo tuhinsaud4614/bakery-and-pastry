@@ -1,7 +1,6 @@
 import { lazy, Suspense } from "react";
 import { Route, Switch } from "react-router-dom";
-import { CircularProgress } from "@material-ui/core";
-
+import Loader from "../shared/components/loader";
 import ROUTES from "./constants";
 
 const Auth = lazy(() => import("../pages/admin/auth"));
@@ -9,7 +8,7 @@ const Dashboard = lazy(() => import("../pages/admin/dashboard"));
 
 const AdminRoutes = () => {
   return (
-    <Suspense fallback={<CircularProgress color="secondary" />}>
+    <Suspense fallback={<Loader />}>
       <Switch>
         <Route path={ROUTES.admin.auth.path} exact>
           <Auth />
