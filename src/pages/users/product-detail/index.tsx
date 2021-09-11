@@ -24,7 +24,7 @@ const Product = () => {
           </Carousel.Item>
         </Carousel>
       </Grid>
-      <Grid item xs={12} sm={6} md={7}>
+      <Grid item xs={12} sm={6} md={7} style={{ overflow: "hidden" }}>
         <Typography className={styles.title} component="h1" gutterBottom>
           MIX-BISCUIT (BABY+PLAIN+STAR) 300 gm
         </Typography>

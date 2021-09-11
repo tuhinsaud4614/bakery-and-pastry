@@ -35,22 +35,14 @@ const useStyles = makeStyles((theme: Theme) =>
         width: "auto",
       },
     },
-    searchIcon: {
-      padding: theme.spacing(0, 2),
-      height: "100%",
-      position: "absolute",
-      pointerEvents: "none",
-      display: "flex",
-      alignItems: "center",
-      justifyContent: "center",
-    },
     inputRoot: {
       color: "inherit",
+      // vertical padding + font size from searchIcon
+      marginRight: `calc(1em + ${theme.spacing(4)}px)`,
     },
     inputInput: {
       padding: theme.spacing(1, 1, 1, 0),
-      // vertical padding + font size from searchIcon
-      paddingLeft: `calc(1em + ${theme.spacing(4)}px)`,
+      paddingLeft: theme.spacing(),
       transition: theme.transitions.create("width"),
       width: "100%",
       [theme.breakpoints.up("sm")]: {
@@ -59,6 +51,17 @@ const useStyles = makeStyles((theme: Theme) =>
           width: "20ch",
         },
       },
+    },
+    searchIcon: {
+      top: 0,
+      right: 0,
+      cursor: "pointer",
+      padding: theme.spacing(0, 2),
+      height: "100%",
+      position: "absolute",
+      display: "flex",
+      alignItems: "center",
+      justifyContent: "center",
     },
   })
 );
