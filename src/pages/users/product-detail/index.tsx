@@ -40,6 +40,16 @@ const Product = () => {
           >
             Contact to order
           </Button>
+          <Typography
+            variant="caption"
+            component="span"
+            style={{ padding: "0 8px" }}
+          >
+            or
+          </Typography>
+          <Typography variant="body1" component="p">
+            Call us <b>01712969807</b>
+          </Typography>
         </Box>
         <Divider light />
         <ShareLinks />

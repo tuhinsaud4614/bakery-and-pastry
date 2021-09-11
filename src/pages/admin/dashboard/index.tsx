@@ -1,5 +1,5 @@
 const Dashboard = () => {
-  return <div>Dashboard</div>;
+  return <p>hello</p>;
 };
-
+Dashboard.displayName = "Dashboard";
 export default Dashboard;

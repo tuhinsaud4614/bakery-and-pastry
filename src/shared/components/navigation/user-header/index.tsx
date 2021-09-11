@@ -9,12 +9,12 @@ import {
 } from "@material-ui/core";
 import { Menu as MenuIcon, Search as SearchIcon } from "@material-ui/icons";
 import { KeyboardEvent, useRef } from "react";
-import { Link, useHistory, useLocation } from "react-router-dom";
-import logo from "../../../../images/logo.svg";
+import { useHistory, useLocation } from "react-router-dom";
 import ROUTES from "../../../../routes/constants";
 import { useAppDispatch } from "../../../../store";
 import { onSearch } from "../../../../store/features/search/index.slice";
 import { toggleMenu } from "../../../../store/features/settings/index.slice";
+import AppLogo from "../../app-logo";
 import useStyles from "./index.style";
 
 const UserHeader = () => {
@@ -61,15 +61,7 @@ const UserHeader = () => {
               <MenuIcon />
             </IconButton>
           )}
-          <Link to={ROUTES.user.home.path} className={classes.titleLink}>
-            <img
-              src={logo}
-              alt="logo"
-              className={classes.title}
-              width="100"
-              height="48"
-            />
-          </Link>
+          <AppLogo to={ROUTES.user.home.path} />
           <div className={classes.content} />
           <div className={classes.search}>
             <InputBase

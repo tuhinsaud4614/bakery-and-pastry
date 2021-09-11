@@ -3,7 +3,7 @@ type DetailType = {
 };
 
 // Admin routes
-type AdminKeyType = "dashboard" | "auth";
+type AdminKeyType = "dashboard" | "auth" | "product";
 type AdminRouteType = { [key in AdminKeyType]: DetailType };
 const ADMIN_ROUTES: AdminRouteType = {
   auth: {
@@ -13,6 +13,10 @@ const ADMIN_ROUTES: AdminRouteType = {
   dashboard: {
     name: "Dashboard",
     path: "/admin",
+  },
+  product: {
+    name: "Product",
+    path: "/admin/product",
   },
 };
 
