@@ -8,6 +8,7 @@ const useStyles = makeStyles((theme: Theme) =>
       },
     },
     content: {
+      overflowX: "hidden",
       padding: theme.spacing(9, 2, 2),
       [theme.breakpoints.up("sm")]: {
         transition: theme.transitions.create("margin", {
@@ -16,6 +17,7 @@ const useStyles = makeStyles((theme: Theme) =>
         }),
         flexGrow: 1,
         marginLeft: -theme.spacing(30),
+        maxWidth: theme.breakpoints.values.lg,
       },
     },
     contentShift: {

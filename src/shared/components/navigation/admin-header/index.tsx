@@ -1,5 +1,5 @@
-import { AppBar, IconButton, Toolbar } from "@material-ui/core";
-import { Menu } from "@material-ui/icons";
+import { AppBar, Box, IconButton, Toolbar, Tooltip } from "@material-ui/core";
+import { ExitToApp, Menu } from "@material-ui/icons";
 import classNames from "classnames";
 import ROUTES from "../../../../routes/constants";
 import { useAppDispatch, useAppSelector } from "../../../../store";
@@ -28,6 +28,18 @@ const AdminHeader = () => {
           </IconButton>
         )}
         <AppLogo to={ROUTES.admin.dashboard.path} />
+        <Box
+          flexGrow={1}
+          display="flex"
+          alignItems="center"
+          justifyContent="flex-end"
+        >
+          <Tooltip title="Logout from admin" aria-label="logout" arrow>
+            <IconButton color="inherit" aria-label="logout">
+              <ExitToApp />
+            </IconButton>
+          </Tooltip>
+        </Box>
       </Toolbar>
     </AppBar>
   );
