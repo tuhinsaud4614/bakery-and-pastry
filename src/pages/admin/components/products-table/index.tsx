@@ -1,5 +1,4 @@
 import {
-  Box,
   PaperProps,
   Table,
   TableBody,
@@ -9,12 +8,11 @@ import {
   TablePagination,
   TableRow,
 } from "@material-ui/core";
-import { Alert, AlertTitle } from "@material-ui/lab";
 import classNames from "classnames";
 import { ChangeEvent, ReactNode, useState } from "react";
+import ContentBox from "../content-box";
 import ProductsTableSkeleton from "./index.skeleton";
 import useStyles from "./index.style";
-import Wrapper from "./wrapper";
 
 interface Props {
   rootProps?: PaperProps;
@@ -34,8 +32,9 @@ interface Props {
   }[];
   loadingData?: boolean;
   error?: {
-    title: string;
+    title?: string;
     message: string;
+    messageStrong?: string;
   };
   size?: "medium" | "small";
   actions?: (product: {
@@ -87,64 +86,52 @@ const ProductsTable = ({
 
   if (loadingData) {
     return (
-      <Wrapper
-        className={styles.root}
-        title={title}
-        titleClassName={styles.title}
-        rootProps={rootProps}
-      >
+      <ContentBox className={styles.root} title={title} rootProps={rootProps}>
         <ProductsTableSkeleton
           rows={rows.length + (showId ? 1 : 0) + (!!actions ? 1 : 0)}
         />
-      </Wrapper>
+      </ContentBox>
     );
   }
 
   if (error) {
     return (
-      <Wrapper
+      <ContentBox
         className={styles.root}
         title={title}
-        titleClassName={styles.title}
         rootProps={rootProps}
-      >
-        <Box px={2} pb={2}>
-          <Alert severity="error">
-            <AlertTitle style={{ textTransform: "capitalize" }}>
-              {error.title}
-            </AlertTitle>
-            {error.message}
-          </Alert>
-        </Box>
-      </Wrapper>
+        alert={{
+          props: {
+            severity: "error",
+          },
+          title: error.title,
+          message: error.message,
+          messageStrong: error.messageStrong,
+        }}
+      />
     );
   }
 
   if (data.length === 0) {
     return (
-      <Wrapper
+      <ContentBox
         className={styles.root}
         title={title}
-        titleClassName={styles.title}
         rootProps={rootProps}
-      >
-        <Box px={2} pb={2}>
-          <Alert severity="warning">
-            <AlertTitle>No Found</AlertTitle>
-            There is no product — <strong>please add some products!</strong>
-          </Alert>
-        </Box>
-      </Wrapper>
+        alert={{
+          props: {
+            severity: "warning",
+          },
+          title: "No Found",
+          message: "There is no product — ",
+          messageStrong: "please add some products!",
+        }}
+      />
     );
   }
 
   return (
-    <Wrapper
-      className={styles.root}
-      title={title}
-      titleClassName={styles.title}
-      rootProps={rootProps}
-    >
+    <ContentBox className={styles.root} title={title} rootProps={rootProps}>
       {data.length > 1 && (
         <TableContainer>
           <Table aria-label="products table" size={size}>
@@ -216,7 +203,7 @@ const ProductsTable = ({
           onRowsPerPageChange={handleChangeRowsPerPage}
         />
       )}
-    </Wrapper>
+    </ContentBox>
   );
 };
 ProductsTable.displayName = "ProductsTable";

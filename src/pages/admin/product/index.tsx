@@ -1,5 +1,12 @@
+import { Fragment } from "react";
+import AddProduct from "./components/add-product";
+
 const Product = () => {
-  return <p>Product</p>;
+  return (
+    <Fragment>
+      <AddProduct />
+    </Fragment>
+  );
 };
 Product.displayName = "Product";
 export default Product;

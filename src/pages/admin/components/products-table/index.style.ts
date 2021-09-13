@@ -18,11 +18,6 @@ const useStyles = makeStyles<
         gutterLeft = 0,
       }) => theme.spacing(gutterTop, gutterRight, gutterBottom, gutterLeft),
     },
-    title: {
-      ...theme.typography.h6,
-      fontWeight: theme.typography.fontWeightBold,
-      padding: theme.spacing(2),
-    },
     tableHeadCell: {
       textTransform: "capitalize",
       background: theme.palette.common.black,
