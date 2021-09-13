@@ -3,7 +3,7 @@ import { createStyles, makeStyles, Theme } from "@material-ui/core";
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
     root: {
-      background: theme.palette.grey[900],
+      background: theme.palette.common.black,
       marginTop: theme.spacing(2),
       padding: theme.spacing(2),
     },
@@ -27,14 +27,14 @@ const useStyles = makeStyles((theme: Theme) =>
       },
     },
     addressLead: {
-      color: theme.palette.grey[100],
+      color: theme.palette.common.white,
     },
     addressText: {
       color: theme.palette.grey[600],
       textDecoration: "none",
     },
     btn: {
-      color: theme.palette.grey[100],
+      color: theme.palette.common.white,
       borderRadius: "50%",
       border: `1px solid ${theme.palette.grey[800]}`,
       padding: theme.spacing(),

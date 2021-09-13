@@ -1,10 +1,8 @@
 import { CATEGORIES } from "../../../shared/constants";
 import ProductsTable from "../components/products-table";
 import Banners from "./components/banners";
-import useStyles from "./index.style";
 
 const Dashboard = () => {
-  const styles = useStyles();
   const data = CATEGORIES.map((item, i) => ({
     id: item.slug,
     title: item.name + " " + i,
@@ -18,15 +16,10 @@ const Dashboard = () => {
       <Banners />
       <ProductsTable
         gutterTop={3}
-        rootProps={{ className: styles.root }}
         title="Latest Product"
         rows={["title", "category", "image", "price"]}
         data={[...data]}
-        error={{ title: "error", message: "Fetching error" }}
         size="small"
-        loadingData={false}
-        showId
-        showPaginate
       />
     </>
   );

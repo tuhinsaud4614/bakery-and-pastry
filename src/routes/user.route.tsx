@@ -6,6 +6,7 @@ import ProductDetail from "../pages/users/product-detail";
 import Loader from "../shared/components/loader";
 import UserFooter from "../shared/components/navigation/user-footer";
 import UserHeader from "../shared/components/navigation/user-header";
+import ScrollToTop from "../shared/components/sroll-to-top";
 import ROUTES from "./constants";
 
 const Home = lazy(() => import("../pages/users/home"));
@@ -37,6 +38,7 @@ const UserRoutes = () => {
         </Switch>
       </Container>
       <UserFooter />
+      <ScrollToTop showBelow={200} />
     </Suspense>
   );
 };
@@ -45,6 +47,7 @@ const useStyles = makeStyles((theme: Theme) =>
   createStyles({
     container: {
       marginTop: theme.spacing(9),
+      position: "relative",
     },
   })
 );

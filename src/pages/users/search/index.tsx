@@ -9,7 +9,6 @@ const Search = () => {
   const styles = useStyles();
   const searchValue = useAppSelector((state) => state.search.value);
 
-  // console.log(searchValue);
   return (
     <Wrapper
       classes={{ sidebar: { root: styles.sidebar } }}

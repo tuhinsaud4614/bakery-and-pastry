@@ -1,6 +1,5 @@
 import {
   Box,
-  IconButton,
   PaperProps,
   Table,
   TableBody,
@@ -10,10 +9,9 @@ import {
   TablePagination,
   TableRow,
 } from "@material-ui/core";
-import { Delete, Edit } from "@material-ui/icons";
 import { Alert, AlertTitle } from "@material-ui/lab";
 import classNames from "classnames";
-import { ChangeEvent, useState } from "react";
+import { ChangeEvent, ReactNode, useState } from "react";
 import ProductsTableSkeleton from "./index.skeleton";
 import useStyles from "./index.style";
 import Wrapper from "./wrapper";
@@ -40,9 +38,16 @@ interface Props {
     message: string;
   };
   size?: "medium" | "small";
+  actions?: (product: {
+    id: string;
+    title: string;
+    category: string;
+    price: number;
+    img: string;
+    featured: boolean;
+  }) => ReactNode | ReactNode[];
   showId?: boolean;
   showPaginate?: boolean;
-  showAction?: boolean;
 }
 
 const ProductsTable = ({
@@ -55,9 +60,9 @@ const ProductsTable = ({
   data = [],
   loadingData = false,
   error,
+  actions,
   size = "medium",
   showId = false,
-  showAction = false,
   showPaginate = false,
   rootProps,
 }: Props) => {
@@ -89,7 +94,7 @@ const ProductsTable = ({
         rootProps={rootProps}
       >
         <ProductsTableSkeleton
-          rows={rows.length + (showId ? 1 : 0) + (showAction ? 1 : 0)}
+          rows={rows.length + (showId ? 1 : 0) + (!!actions ? 1 : 0)}
         />
       </Wrapper>
     );
@@ -154,7 +159,7 @@ const ProductsTable = ({
                   </TableCell>
                 ))}
 
-                {showAction && (
+                {!!actions && (
                   <TableCell className={styles.tableHeadCell}>Action</TableCell>
                 )}
               </TableRow>
@@ -189,21 +194,9 @@ const ProductsTable = ({
                       />
                     </TableCell>
                     <TableCell>৳{product.price}</TableCell>
-                    {showAction && (
+                    {!!actions && (
                       <TableCell className={styles.action}>
-                        <IconButton
-                          aria-label="edit product"
-                          className={styles.editBtn}
-                        >
-                          <Edit />
-                        </IconButton>
-                        <IconButton
-                          aria-label="delete product"
-                          edge="start"
-                          color="secondary"
-                        >
-                          <Delete />
-                        </IconButton>
+                        {actions(product)}
                       </TableCell>
                     )}
                   </TableRow>

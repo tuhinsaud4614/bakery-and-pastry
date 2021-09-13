@@ -47,9 +47,6 @@ const useStyles = makeStyles<
     action: {
       whiteSpace: "nowrap",
     },
-    editBtn: {
-      color: theme.palette.warning.main,
-    },
   })
 );
 

@@ -1,11 +1,5 @@
 import { createStyles, makeStyles, Theme } from "@material-ui/core";
 
-const useStyles = makeStyles((theme: Theme) =>
-  createStyles({
-    root: {
-      // margin: "3p",
-    },
-  })
-);
+const useStyles = makeStyles((theme: Theme) => createStyles({}));
 
 export default useStyles;
