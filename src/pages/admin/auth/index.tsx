@@ -33,8 +33,6 @@ const Auth = () => {
             dirty,
             isSubmitting,
           }) => {
-            console.log(isSubmitting);
-
             return (
               <form style={{ width: "100%" }} onSubmit={handleSubmit}>
                 <TextField

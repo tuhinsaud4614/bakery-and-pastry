@@ -4,7 +4,8 @@
     "source.fixAll.eslint": true,
     "source.fixAll.tslint": true,
     "source.organizeImports": true
-  }
+  },
+  "cSpell.words": ["Formik"]
   // "javascript.validate.enable": false,
   // "typescript.validate.enable": false
 }

@@ -9,7 +9,7 @@ const useStyles = makeStyles((theme: Theme) =>
     },
     content: {
       overflowX: "hidden",
-      padding: theme.spacing(9, 2, 2),
+      padding: theme.spacing(10, 2, 2),
       [theme.breakpoints.up("sm")]: {
         transition: theme.transitions.create("margin", {
           easing: theme.transitions.easing.sharp,
