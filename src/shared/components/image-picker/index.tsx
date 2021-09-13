@@ -55,8 +55,8 @@ const ImagePicker = ({
   if (!!value) {
     return (
       <Box
-        mt={margin && 2}
-        mb={margin && 1}
+        mt={margin ? 2 : 0}
+        mb={margin ? 1 : 0}
         className={classNames(styles.common, styles.imageContainer)}
       >
         <img
@@ -73,7 +73,7 @@ const ImagePicker = ({
   }
 
   return (
-    <Box mt={margin && 2} mb={margin && 1}>
+    <Box mt={margin ? 2 : 0} mb={margin ? 1 : 0}>
       <input
         id={id || "image-picker"}
         type="file"

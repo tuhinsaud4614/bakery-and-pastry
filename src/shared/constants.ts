@@ -41,3 +41,25 @@ export const CATEGORIES = [
     srcSet: `${others300} 300w, ${others} 1200w`,
   },
 ];
+
+export interface IProduct {
+  id: string;
+  title: string;
+  category: string;
+  link: string;
+  price: number;
+  img: string;
+  featured: boolean;
+}
+
+export function convertSlugToTitle(slug: string): string {
+  const cats: { [key: string]: string } = {
+    "pastry-cup-pastry-tart": "Pastry, Cup Pastry & Tart",
+    cake: "Cake",
+    sweets: "Sweets",
+    "biscuits-toast": "Biscuits & Toast",
+    others: "Others",
+  };
+
+  return cats[slug] || "Others";
+}

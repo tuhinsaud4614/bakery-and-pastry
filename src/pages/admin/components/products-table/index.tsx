@@ -1,4 +1,5 @@
 import {
+  Button,
   PaperProps,
   Table,
   TableBody,
@@ -8,8 +9,8 @@ import {
   TablePagination,
   TableRow,
 } from "@material-ui/core";
-import classNames from "classnames";
 import { ChangeEvent, ReactNode, useState } from "react";
+import { convertSlugToTitle, IProduct } from "../../../../shared/constants";
 import ContentBox from "../content-box";
 import ProductsTableSkeleton from "./index.skeleton";
 import useStyles from "./index.style";
@@ -22,14 +23,7 @@ interface Props {
   gutterRight?: number;
   title: string;
   rows: string[];
-  data: {
-    id: string;
-    title: string;
-    category: string;
-    price: number;
-    img: string;
-    featured: boolean;
-  }[];
+  data: IProduct[];
   loadingData?: boolean;
   error?: {
     title?: string;
@@ -37,14 +31,7 @@ interface Props {
     messageStrong?: string;
   };
   size?: "medium" | "small";
-  actions?: (product: {
-    id: string;
-    title: string;
-    category: string;
-    price: number;
-    img: string;
-    featured: boolean;
-  }) => ReactNode | ReactNode[];
+  actions?: (product: IProduct) => ReactNode | ReactNode[];
   showId?: boolean;
   showPaginate?: boolean;
 }
@@ -162,14 +149,20 @@ const ProductsTable = ({
                     <TableCell
                       component="th"
                       scope="row"
-                      className={classNames(
-                        product.featured && styles.featured
-                      )}
-                      style={{ textTransform: "capitalize" }}
+                      className={styles.title}
                     >
-                      {product.title}
+                      <Button
+                        color={product.featured ? "secondary" : "primary"}
+                        aria-label="title"
+                        target="_blank"
+                        href={product.link}
+                      >
+                        {product.title}
+                      </Button>
                     </TableCell>
-                    <TableCell>{product.category}</TableCell>
+                    <TableCell>
+                      {convertSlugToTitle(product.category)}
+                    </TableCell>
                     <TableCell>
                       <img
                         className={styles.img}

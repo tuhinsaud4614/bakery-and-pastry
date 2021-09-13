@@ -26,8 +26,8 @@ const useStyles = makeStyles<
     skeletonHeadCell: {
       background: theme.palette.grey[500],
     },
-    featured: {
-      color: theme.palette.secondary.main,
+    title: {
+      textTransform: "capitalize",
     },
     img: {
       width: theme.spacing(10),
