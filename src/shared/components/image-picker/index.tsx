@@ -85,7 +85,7 @@ const ImagePicker = ({
       <label htmlFor={id || "image-picker"}>
         <Button
           className={styles.common}
-          variant="contained"
+          variant="outlined"
           color="secondary"
           aria-label="image picker"
           component="span"

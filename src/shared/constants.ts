@@ -55,6 +55,12 @@ export interface IProduct {
   featured: boolean;
 }
 
+export interface ICustomError {
+  title?: string;
+  message: string;
+  messageStrong?: string;
+}
+
 export function convertSlugToTitle(slug: string): string {
   const cats: { [key: string]: string } = {
     "pastry-cup-pastry-tart": "Pastry, Cup Pastry & Tart",

@@ -9,7 +9,7 @@ import {
   TablePagination,
   TableRow,
 } from "@material-ui/core";
-import { ChangeEvent, ReactNode, useState } from "react";
+import { ChangeEvent, memo, ReactNode, useState } from "react";
 import { convertSlugToTitle, IProduct } from "../../../../shared/constants";
 import ContentBox from "../content-box";
 import ProductsTableSkeleton from "./index.skeleton";
@@ -170,7 +170,7 @@ const ProductsTable = ({
                         width="50"
                         src={product.image.src}
                         alt={product.image.name}
-                        title={product.title}
+                        title={product.image.name}
                       />
                     </TableCell>
                     <TableCell>৳{product.price}</TableCell>
@@ -200,4 +200,4 @@ const ProductsTable = ({
   );
 };
 ProductsTable.displayName = "ProductsTable";
-export default ProductsTable;
+export default memo(ProductsTable);

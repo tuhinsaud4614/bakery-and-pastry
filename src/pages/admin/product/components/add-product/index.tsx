@@ -73,7 +73,7 @@ const AddProduct = () => {
         open={!!showSnackbar}
       >
         <Alert severity="success" variant="filled">
-          {"showSnackbar"}
+          {showSnackbar}
         </Alert>
       </Snackbar>
       <Divider />
