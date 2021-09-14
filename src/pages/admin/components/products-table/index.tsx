@@ -155,6 +155,7 @@ const ProductsTable = ({
                         color={product.featured ? "secondary" : "primary"}
                         aria-label="title"
                         target="_blank"
+                        rel="noreferrer"
                         href={product.link}
                       >
                         {product.title}

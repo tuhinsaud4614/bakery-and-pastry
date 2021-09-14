@@ -12,14 +12,15 @@ import {
   Snackbar,
   TextField,
 } from "@material-ui/core";
-import { Alert } from "@material-ui/lab";
+import { Alert, AlertTitle } from "@material-ui/lab";
 import { Formik, FormikHelpers } from "formik";
 import { useState } from "react";
 import ImagePicker from "../../../../../shared/components/image-picker";
 import LoadingButton from "../../../../../shared/components/loading-button";
 import { CATEGORIES } from "../../../../../shared/constants";
-import { useAppDispatch } from "../../../../../store";
+import { useAppDispatch, useAppSelector } from "../../../../../store";
 import { addAdminProduct } from "../../../../../store/features/admin/product/actions";
+import { clearAdminProductError } from "../../../../../store/features/admin/product/index.slice";
 import ContentBox from "../../../components/content-box";
 import useStyles from "./index.style";
 import { validationSchema } from "./validation.schema";
@@ -37,6 +38,7 @@ const AddProduct = () => {
   const styles = useStyles();
   const [showSnackbar, setShowSnackbar] = useState<string>("");
   const rdxDispatch = useAppDispatch();
+  const { error } = useAppSelector((state) => state.adminProduct);
 
   const initialValues: IValues = {
     title: "",
@@ -68,7 +70,7 @@ const AddProduct = () => {
             setShowSnackbar("");
           }
         }}
-        autoHideDuration={5000}
+        autoHideDuration={4000}
         anchorOrigin={{ vertical: "top", horizontal: "right" }}
         open={!!showSnackbar}
       >
@@ -77,6 +79,18 @@ const AddProduct = () => {
         </Alert>
       </Snackbar>
       <Divider />
+      {/* If any errors occurred */}
+      {error.adding && (
+        <Alert
+          severity="error"
+          style={{ borderRadius: "0" }}
+          onClose={() => rdxDispatch(clearAdminProductError("adding"))}
+        >
+          {error.adding.title && <AlertTitle>{error.adding.title}</AlertTitle>}
+          {error.adding.message}
+        </Alert>
+      )}
+
       <Formik
         validationSchema={validationSchema}
         initialValues={initialValues}
