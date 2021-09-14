@@ -9,12 +9,17 @@ import {
   InputLabel,
   MenuItem,
   OutlinedInput,
+  Snackbar,
   TextField,
 } from "@material-ui/core";
+import { Alert } from "@material-ui/lab";
 import { Formik, FormikHelpers } from "formik";
+import { useState } from "react";
 import ImagePicker from "../../../../../shared/components/image-picker";
 import LoadingButton from "../../../../../shared/components/loading-button";
 import { CATEGORIES } from "../../../../../shared/constants";
+import { useAppDispatch } from "../../../../../store";
+import { addAdminProduct } from "../../../../../store/features/admin/product/actions";
 import ContentBox from "../../../components/content-box";
 import useStyles from "./index.style";
 import { validationSchema } from "./validation.schema";
@@ -30,6 +35,8 @@ interface IValues {
 
 const AddProduct = () => {
   const styles = useStyles();
+  const [showSnackbar, setShowSnackbar] = useState<string>("");
+  const rdxDispatch = useAppDispatch();
 
   const initialValues: IValues = {
     title: "",
@@ -44,10 +51,31 @@ const AddProduct = () => {
     values: IValues,
     { resetForm }: FormikHelpers<IValues>
   ): Promise<any> => {
-    console.log(values);
+    const resultAction = await rdxDispatch(addAdminProduct({ ...values }));
+    if (addAdminProduct.fulfilled.match(resultAction)) {
+      setShowSnackbar(
+        `Product ${resultAction.payload.title} added successfully!`
+      );
+    }
+    resetForm({ values: initialValues });
   };
+
   return (
     <ContentBox title="add product" className={styles.root}>
+      <Snackbar
+        onClose={(_, reasons) => {
+          if (reasons === "timeout") {
+            setShowSnackbar("");
+          }
+        }}
+        autoHideDuration={5000}
+        anchorOrigin={{ vertical: "top", horizontal: "right" }}
+        open={!!showSnackbar}
+      >
+        <Alert severity="success" variant="filled">
+          {"showSnackbar"}
+        </Alert>
+      </Snackbar>
       <Divider />
       <Formik
         validationSchema={validationSchema}

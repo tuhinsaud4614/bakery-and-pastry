@@ -1,6 +1,7 @@
 import { lazy, Suspense } from "react";
 import { Route, Switch } from "react-router-dom";
 import Wrapper from "../pages/admin/components/wrapper";
+import PageNotFound from "../pages/page-not-found";
 import Loader from "../shared/components/loader";
 import ROUTES from "./constants";
 
@@ -23,6 +24,11 @@ const AdminRoutes = () => {
         <Route path={ROUTES.admin.dashboard.path} exact>
           <Wrapper>
             <Dashboard />
+          </Wrapper>
+        </Route>
+        <Route>
+          <Wrapper>
+            <PageNotFound path={ROUTES.admin.dashboard.path} />
           </Wrapper>
         </Route>
       </Switch>

@@ -119,7 +119,7 @@ const ProductsTable = ({
 
   return (
     <ContentBox className={styles.root} title={title} rootProps={rootProps}>
-      {data.length > 1 && (
+      {data.length >= 1 && (
         <TableContainer>
           <Table aria-label="products table" size={size}>
             <TableHead>
@@ -142,7 +142,7 @@ const ProductsTable = ({
               {data
                 .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
                 .map((product, index) => (
-                  <TableRow key={index}>
+                  <TableRow key={product.id}>
                     {showId && (
                       <TableCell>{index + 1 + page * rowsPerPage}</TableCell>
                     )}
@@ -168,8 +168,8 @@ const ProductsTable = ({
                         className={styles.img}
                         height="70"
                         width="50"
-                        src={product.img}
-                        alt={product.title}
+                        src={product.image.src}
+                        alt={product.image.name}
                         title={product.title}
                       />
                     </TableCell>

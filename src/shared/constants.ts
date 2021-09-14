@@ -48,7 +48,10 @@ export interface IProduct {
   category: string;
   link: string;
   price: number;
-  img: string;
+  image: {
+    name: string;
+    src: string;
+  };
   featured: boolean;
 }
 
