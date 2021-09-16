@@ -18,9 +18,7 @@ const Auth = () => {
         <Formik
           validationSchema={authSchema}
           initialValues={{ username: "", password: "" }}
-          onSubmit={async (values) => {
-            console.log(values);
-          }}
+          onSubmit={async (values) => {}}
         >
           {({
             handleSubmit,

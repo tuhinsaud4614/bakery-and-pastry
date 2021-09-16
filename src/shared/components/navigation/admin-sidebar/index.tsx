@@ -7,6 +7,7 @@ import {
   useTheme,
 } from "@material-ui/core";
 import { ChevronLeft } from "@material-ui/icons";
+import { useEffect } from "react";
 import { useAppDispatch, useAppSelector } from "../../../../store";
 import { toggleAdminMenu } from "../../../../store/features/settings/index.slice";
 import useStyles from "./index.style";
@@ -18,6 +19,14 @@ const AdminSidebar = () => {
   const rdxDispatch = useAppDispatch();
   const theme = useTheme();
   const queries = useMediaQuery(theme.breakpoints.up("sm"));
+
+  useEffect(() => {
+    const { matches } = window.matchMedia("(min-width: 600px)");
+
+    if (matches) {
+      rdxDispatch(toggleAdminMenu(true));
+    }
+  }, [rdxDispatch]);
 
   const content = (
     <>

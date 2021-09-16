@@ -45,6 +45,16 @@ const useStyles = makeStyles((theme: Theme) =>
       height: "inherit",
       width: "inherit",
     },
+    prevImage: {
+      borderRadius: theme.spacing(),
+      objectFit: "cover",
+      border: `1px solid ${theme.palette.secondary.dark}`,
+      padding: theme.spacing(0.5),
+    },
+    hasPrevImage: {
+      display: "flex",
+      flexWrap: "wrap",
+    },
   })
 );
 

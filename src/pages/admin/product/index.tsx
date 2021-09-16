@@ -5,6 +5,7 @@ import { fetchAdminProducts } from "../../../store/features/admin/product/action
 import ProductsTable from "../components/products-table";
 import AddProduct from "./components/add-product";
 import DeleteProduct from "./components/delete-product";
+import EditProduct from "./components/edit-product";
 
 const ProductsList = () => {
   const [showSnackbar, setShowSnackbar] = useState<{
@@ -48,6 +49,15 @@ const ProductsList = () => {
         }
         actions={(product) => (
           <Fragment>
+            <EditProduct
+              product={product}
+              onEditComplete={(message) => {
+                setShowSnackbar((prev) => ({
+                  ...prev,
+                  edit: message,
+                }));
+              }}
+            />
             <DeleteProduct
               product={product}
               onDeleteComplete={(text) =>

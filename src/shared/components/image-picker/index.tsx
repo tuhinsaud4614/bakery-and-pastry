@@ -1,4 +1,4 @@
-import { Box, Button, FormHelperText } from "@material-ui/core";
+import { Box, Button, FormHelperText, InputLabel } from "@material-ui/core";
 import { Close, PhotoCamera } from "@material-ui/icons";
 import classNames from "classnames";
 import {
@@ -10,15 +10,36 @@ import {
 } from "react";
 import useStyles from "./index.style";
 
+const PrevImage = ({ src, label }: { src: string; label?: string }) => {
+  const styles = useStyles();
+  return (
+    <Box mr={2}>
+      <InputLabel style={{ paddingBottom: "8px" }}>Prev {label}</InputLabel>
+      <img
+        className={classNames(styles.common, styles.prevImage)}
+        src={src}
+        alt="Prev"
+        height="70"
+        width="50"
+        title="Prev Image"
+      />
+    </Box>
+  );
+};
+
 interface Props extends InputHTMLAttributes<HTMLInputElement> {
   onChanged: (f: File | null) => void;
   data: File | null;
   helperText?: ReactNode;
   error?: boolean;
   margin?: boolean;
+  label?: string;
+  prevImage?: string;
 }
 
 const ImagePicker = ({
+  label,
+  prevImage,
   data,
   helperText,
   onChanged,
@@ -38,7 +59,7 @@ const ImagePicker = ({
   };
 
   useEffect(() => {
-    if (data && !error) {
+    if (data) {
       const fileReader = new FileReader();
       fileReader.onload = () => {
         const result = fileReader.result;
@@ -52,28 +73,11 @@ const ImagePicker = ({
     }
   }, [data, error]);
 
-  if (!!value) {
-    return (
-      <Box
-        mt={margin ? 2 : 0}
-        mb={margin ? 1 : 0}
-        className={classNames(styles.common, styles.imageContainer)}
-      >
-        <img
-          className={styles.img}
-          src={value}
-          alt="Picked"
-          height="70"
-          width="50"
-          title="Picked"
-        />
-        <Close className={styles.removeImage} onClick={() => onChanged(null)} />
-      </Box>
-    );
-  }
+  // Prev Image
 
-  return (
-    <Box mt={margin ? 2 : 0} mb={margin ? 1 : 0}>
+  // File Input
+  let content = (
+    <>
       <input
         id={id || "image-picker"}
         type="file"
@@ -93,15 +97,51 @@ const ImagePicker = ({
           <PhotoCamera fontSize="large" />
         </Button>
       </label>
-      {helperText && (
-        <FormHelperText
-          id={id || "image-picker"}
-          variant="filled"
-          error={error}
-        >
-          {helperText}
-        </FormHelperText>
-      )}
+    </>
+  );
+
+  // After Picking Image Input
+  if (!!value) {
+    content = (
+      <div className={classNames(styles.common, styles.imageContainer)}>
+        <img
+          className={styles.img}
+          src={value}
+          alt="Picked"
+          height="70"
+          width="50"
+          title="Picked"
+        />
+        <Close className={styles.removeImage} onClick={() => onChanged(null)} />
+      </div>
+    );
+  }
+
+  return (
+    <Box
+      mt={margin ? 2 : 0}
+      mb={margin ? 1 : 0}
+      className={classNames(prevImage && styles.hasPrevImage)}
+    >
+      {prevImage && <PrevImage src={prevImage} label={label} />}
+      <div>
+        {(label || prevImage) && (
+          <InputLabel style={{ paddingBottom: "8px" }} required={rest.required}>
+            {prevImage && "New "}
+            {label}
+          </InputLabel>
+        )}
+        {content}
+        {helperText && (
+          <FormHelperText
+            id={id || "image-picker"}
+            variant="filled"
+            error={error}
+          >
+            {helperText}
+          </FormHelperText>
+        )}
+      </div>
     </Box>
   );
 };

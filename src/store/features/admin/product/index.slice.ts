@@ -2,6 +2,7 @@ import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import {
   addAdminProduct,
   deleteAdminProduct,
+  editAdminProduct,
   fetchAdminProducts,
 } from "./actions";
 import { AdminProductsActionKeysType, AdminProductsState } from "./types";
@@ -30,7 +31,9 @@ const adminProductSlice = createSlice({
       state,
       { payload }: PayloadAction<AdminProductsActionKeysType>
     ) => {
-      state.error[payload] = null;
+      if (state.error[payload]) {
+        state.error[payload] = null;
+      }
     },
   },
   extraReducers: (builder) => {
@@ -91,6 +94,31 @@ const adminProductSlice = createSlice({
         }
       })
       .addCase(deleteAdminProduct.rejected, (state, action) => {
+        if (action.payload && action.payload.message) {
+          state.status.deleting = "idle";
+          state.error.deleting = action.payload;
+        }
+      })
+      // update product data
+      .addCase(editAdminProduct.pending, (state) => {
+        if (state.status.updating === "idle") {
+          state.status.updating = "pending";
+          state.error.updating = null;
+        }
+      })
+      .addCase(editAdminProduct.fulfilled, (state, action) => {
+        if (state.status.updating === "pending") {
+          state.status.updating = "idle";
+          state.error.updating = null;
+          const index = state.products.findIndex(
+            (product) => product.id === action.payload.id
+          );
+          if (index >= 0) {
+            state.products[index] = { ...action.payload };
+          }
+        }
+      })
+      .addCase(editAdminProduct.rejected, (state, action) => {
         if (action.payload && action.payload.message) {
           state.status.deleting = "idle";
           state.error.deleting = action.payload;

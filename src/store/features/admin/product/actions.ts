@@ -10,6 +10,7 @@ import {
   query,
   QueryConstraint,
   serverTimestamp,
+  updateDoc,
 } from "firebase/firestore";
 import {
   deleteObject,
@@ -22,7 +23,7 @@ import { ReduxErrorType } from "../..";
 import { AppDispatch, AppState } from "../../..";
 import { IProduct } from "../../../../shared/constants";
 import { fireStore } from "../../../../shared/firebase-db";
-import { fileErrorGenerator } from "./utils";
+import { fileErrorGenerator, updateImageForProduct } from "./utils";
 
 // Admin fetching products
 export const fetchAdminProducts = createAsyncThunk<
@@ -126,7 +127,8 @@ export const addAdminProduct = createAsyncThunk<
       if (err.code) {
         newError = fileErrorGenerator(err.code);
         return rejectWithValue(newError);
-      } else if (
+      }
+      if (
         err["error"] &&
         err["error"]["code"] &&
         err["error"]["code"] === 403
@@ -153,8 +155,6 @@ export const deleteAdminProduct = createAsyncThunk<
   }
 >("admin/products/delete", async (product, { rejectWithValue }) => {
   try {
-    // let rdxError: ReduxErrorType = null;
-
     const storage = getStorage();
     const deleteRef = ref(storage, product.image.name);
 
@@ -172,11 +172,79 @@ export const deleteAdminProduct = createAsyncThunk<
     if (err.code) {
       newError = fileErrorGenerator(err.code);
       return rejectWithValue(newError);
-    } else if (
-      err["error"] &&
-      err["error"]["code"] &&
-      err["error"]["code"] === 403
-    ) {
+    }
+
+    if (err["error"] && err["error"]["code"] && err["error"]["code"] === 403) {
+      newError = {
+        title: "Unauthorized",
+        message: "You are not authorized",
+      };
+    }
+
+    return rejectWithValue(newError);
+  }
+});
+
+// Admin edit product
+export const editAdminProduct = createAsyncThunk<
+  IProduct,
+  {
+    id: string;
+    title: string;
+    category: string;
+    link: string;
+    price: number;
+    image: File | null;
+    prevImage: { name: string; src: string };
+    featured: boolean;
+  },
+  {
+    dispatch: AppDispatch;
+    state: AppState;
+    rejectValue: ReduxErrorType;
+  }
+>("admin/products/edit", async (product, { rejectWithValue }) => {
+  try {
+    // let rdxError: ReduxErrorType = null;
+
+    let newImageUri = product.prevImage;
+
+    if (product.image !== null) {
+      newImageUri = await updateImageForProduct(
+        product.image,
+        product.prevImage
+      );
+    }
+
+    const updatingRef = doc(fireStore, "products", product.id);
+    await updateDoc(updatingRef, {
+      title: product.title,
+      category: product.category,
+      link: product.link,
+      price: product.price,
+      featured: product.featured,
+      image: { ...newImageUri },
+    });
+    return {
+      id: product.id,
+      title: product.title,
+      category: product.category,
+      link: product.link,
+      price: product.price,
+      featured: product.featured,
+      image: { ...newImageUri },
+    };
+  } catch (err: any) {
+    let newError: ReduxErrorType = {
+      title: "Error",
+      message: "Something went wrong",
+    };
+    if (err.code) {
+      newError = fileErrorGenerator(err.code);
+      return rejectWithValue(newError);
+    }
+
+    if (err["error"] && err["error"]["code"] && err["error"]["code"] === 403) {
       newError = {
         title: "Unauthorized",
         message: "You are not authorized",

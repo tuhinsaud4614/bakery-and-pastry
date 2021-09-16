@@ -223,9 +223,11 @@ const AddProduct = () => {
                 data={values.image}
                 error={touched.image && !!errors.image}
                 helperText={errors.image && touched.image && errors.image}
+                required
+                label="Pick Image"
               />
               <LoadingButton
-                aria-label="login-btn"
+                aria-label="add-product"
                 type="submit"
                 color="secondary"
                 variant="contained"

@@ -1,3 +1,10 @@
+import {
+  deleteObject,
+  getDownloadURL,
+  getStorage,
+  ref,
+  uploadBytes,
+} from "@firebase/storage";
 import { ReduxErrorType } from "../..";
 
 export const fileErrorGenerator = (code: unknown): ReduxErrorType => {
@@ -24,5 +31,25 @@ export const fileErrorGenerator = (code: unknown): ReduxErrorType => {
         message: "Something went wrong",
         title: "Error",
       };
+  }
+};
+
+export const updateImageForProduct = async (
+  image: File,
+  prevImage: { name: string; src: string }
+) => {
+  try {
+    const storage = getStorage();
+    const deleteRef = ref(storage, prevImage.name);
+    const result = await Promise.all([
+      await deleteObject(deleteRef),
+      await uploadBytes(deleteRef, image),
+    ]);
+
+    const imageUri = await getDownloadURL(result[1].ref);
+
+    return { name: result[1].metadata.name, src: imageUri } as const;
+  } catch (error) {
+    throw error;
   }
 };
