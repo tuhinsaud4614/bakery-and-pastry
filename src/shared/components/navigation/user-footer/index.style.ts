@@ -3,8 +3,8 @@ import { createStyles, makeStyles, Theme } from "@material-ui/core";
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
     root: {
-      background: theme.palette.common.black,
-      marginTop: theme.spacing(2),
+      background: "#D6F7A3",
+      marginTop: theme.spacing(3),
       padding: theme.spacing(2),
     },
     link: {
@@ -16,7 +16,7 @@ const useStyles = makeStyles((theme: Theme) =>
     },
     infoTitle: {
       fontWeight: 600,
-      color: "#fff",
+      color: "#7B4B94",
     },
     address: {
       listStyle: "none",
@@ -27,19 +27,23 @@ const useStyles = makeStyles((theme: Theme) =>
       },
     },
     addressLead: {
-      color: theme.palette.common.white,
+      color: "#505591",
     },
     addressText: {
-      color: theme.palette.grey[600],
+      color: theme.palette.common.black,
       textDecoration: "none",
     },
     btn: {
-      color: theme.palette.common.white,
-      borderRadius: "50%",
-      border: `1px solid ${theme.palette.grey[800]}`,
+      color: "#505591",
+      borderRadius: theme.spacing(),
+      border: `1px solid #505591`,
       padding: theme.spacing(),
       "& svg": {
         fontSize: "1rem",
+      },
+      "&:hover": {
+        color: theme.palette.common.white,
+        borderColor: "transparent",
       },
       "&:not(:last-child)": {
         marginRight: theme.spacing(),
@@ -61,8 +65,8 @@ const useStyles = makeStyles((theme: Theme) =>
       },
     },
     divider: {
-      background: theme.palette.grey[800],
-      margin: theme.spacing(1, 0),
+      // background: theme.palette.primary,
+      margin: theme.spacing(2, 0),
     },
   })
 );

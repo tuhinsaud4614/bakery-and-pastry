@@ -266,7 +266,12 @@ const EditForm = ({
                 />
               </DialogContent>
               <DialogActions>
-                <Button variant="outlined" onClick={onClose} type="button">
+                <Button
+                  variant="outlined"
+                  onClick={onClose}
+                  type="button"
+                  disabled={isSubmitting}
+                >
                   Cancel
                 </Button>
                 <LoadingButton

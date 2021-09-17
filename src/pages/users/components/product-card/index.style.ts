@@ -1,10 +1,10 @@
 import { createStyles, makeStyles, Theme } from "@material-ui/core";
-import { deepPurple } from "@material-ui/core/colors";
+import { green } from "@material-ui/core/colors";
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
     root: {
-      background: deepPurple[50],
+      background: green["A100"],
       position: "relative",
       height: "100%",
     },
@@ -23,20 +23,27 @@ const useStyles = makeStyles((theme: Theme) =>
     category: {
       textTransform: "capitalize",
       textDecoration: "none",
-      ...theme.typography.caption,
-      color: theme.palette.text.secondary,
+      ...theme.typography.body2,
+      [theme.breakpoints.down("sm")]: {
+        ...theme.typography.body1,
+      },
+      color: "#7B4B94",
       "&:hover": {
-        color: theme.palette.primary.main,
+        color: "#505591",
       },
     },
     title: {
-      ...theme.typography.body2,
+      ...theme.typography.body1,
+      [theme.breakpoints.down("sm")]: {
+        ...theme.typography.h6,
+      },
+      fontWeight: "bold",
       display: "block",
       textDecoration: "none",
-      color: theme.palette.secondary.main,
+      color: theme.palette.info.main,
       textTransform: "uppercase",
       "&:hover": {
-        color: theme.palette.secondary.light,
+        color: theme.palette.info.dark,
       },
     },
     price: {

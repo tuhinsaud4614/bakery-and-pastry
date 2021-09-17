@@ -4,8 +4,8 @@ const useStyles = makeStyles((theme: Theme) =>
   createStyles({
     btn: {
       color: theme.palette.text.primary,
-      borderRadius: "50%",
-      border: `1px solid ${theme.palette.grey[800]}`,
+      borderRadius: theme.spacing(),
+      border: `1px solid ${theme.palette.primary.light}`,
       padding: theme.spacing(),
       "&:hover": {
         color: theme.palette.grey[100],

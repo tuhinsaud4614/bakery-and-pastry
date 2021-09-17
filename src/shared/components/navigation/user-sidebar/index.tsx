@@ -23,6 +23,15 @@ interface ContentProps {
 
 const Content = ({ classes }: ContentProps) => {
   const styles = useStyles();
+  const rdxDispatch = useAppDispatch();
+  const theme = useTheme();
+  const queries = useMediaQuery(theme.breakpoints.up("sm"));
+
+  const onMobileClose = () => {
+    if (!queries) {
+      rdxDispatch(toggleMenu());
+    }
+  };
   return (
     <Box
       component="aside"
@@ -30,7 +39,7 @@ const Content = ({ classes }: ContentProps) => {
       className={classNames(styles.root, classes?.root)}
     >
       <Typography
-        variant="body2"
+        variant="h6"
         component="h3"
         className={classNames(styles.title, classes?.title)}
       >
@@ -38,7 +47,11 @@ const Content = ({ classes }: ContentProps) => {
       </Typography>
       <ul className={classNames(styles.items, classes?.items)}>
         {CATEGORIES.map((category) => (
-          <li key={category.slug} className={classes?.item}>
+          <li
+            key={category.slug}
+            className={classes?.item}
+            onClick={onMobileClose}
+          >
             <NavLink
               to={`/category/${category.slug}`}
               className={styles.item}

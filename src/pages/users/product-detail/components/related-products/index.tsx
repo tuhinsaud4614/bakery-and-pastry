@@ -1,6 +1,6 @@
 import { Divider, Grid, Paper, Typography } from "@material-ui/core";
 import { CATEGORIES } from "../../../../../shared/constants";
-import ProductCard from "../../../components/product-card";
+import ProductCardSkeleton from "../../../components/product-card/index.skeleton";
 import useStyles from "./index.style";
 
 const RelatedProducts = () => {
@@ -14,13 +14,14 @@ const RelatedProducts = () => {
       <Grid container spacing={2} className={styles.items}>
         {CATEGORIES.map((category) => (
           <Grid key={category.slug} item xs={6} sm={4} md={3}>
-            <ProductCard
+            <ProductCardSkeleton />
+            {/* <ProductCard
               img={category.src}
               category={category.name}
               slug={category.slug}
               title="BLUEBERRY CUP"
               price={140}
-            />
+            /> */}
           </Grid>
         ))}
       </Grid>

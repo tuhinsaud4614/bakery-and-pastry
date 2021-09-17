@@ -19,7 +19,7 @@ const useStyles = makeStyles((theme: Theme) =>
       marginTop: theme.spacing(),
     },
     item: {
-      ...theme.typography.body1,
+      ...theme.typography.h6,
       display: "block",
       textDecoration: "none",
       color: theme.palette.grey[500],

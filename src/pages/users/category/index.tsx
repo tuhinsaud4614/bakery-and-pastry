@@ -3,6 +3,7 @@ import { useMemo } from "react";
 import { Redirect, useParams } from "react-router-dom";
 import ROUTES from "../../../routes/constants";
 import { CATEGORIES } from "../../../shared/constants";
+import { useAppDispatch, useAppSelector } from "../../../store";
 import ProductCard from "../components/product-card";
 import Wrapper from "../components/Wrapper";
 import useStyles from "./index.style";
@@ -10,6 +11,21 @@ import useStyles from "./index.style";
 const Category = () => {
   const { slug } = useParams<{ slug: string }>();
   const styles = useStyles();
+
+  const { error, data, status } = useAppSelector(
+    (state) => state.usersAllProducts
+  );
+  const rdxDispatch = useAppDispatch();
+
+  // useEffect(() => {
+  //   (async () => {
+  //     await rdxDispatch(fetchUsersFeaturedProducts(4)).unwrap();
+  //   })();
+
+  //   return () => {
+  //     rdxDispatch(removeFeaturedProducts());
+  //   };
+  // }, [rdxDispatch]);
 
   // If invalid found redirect to home
   const category = useMemo(() => {
@@ -38,17 +54,10 @@ const Category = () => {
       }
     >
       <Grid container spacing={2} className={styles.items}>
-        {CATEGORIES.map((category) => (
-          <Grid key={category.slug} item xs={6} sm={4} md={3}>
+        {data.map((product) => (
+          <Grid key={product.id} item xs={6} sm={4} md={3}>
             {/* <ProductCardSkeleton /> */}
-            <ProductCard
-              featured={true}
-              img={category.src}
-              category={category.name}
-              slug={category.slug}
-              title="BLUEBERRY CUP"
-              price={140}
-            />
+            <ProductCard product={product} />
           </Grid>
         ))}
       </Grid>

@@ -9,7 +9,21 @@ import pastryCupPastryTart from "../images/pastry-cup-pastry-tart.jpeg";
 import sweets300 from "../images/sweets-300w.jpeg";
 import sweets from "../images/sweets.jpeg";
 
-export const CATEGORIES = [
+export type CategorySlugType =
+  | "pastry-cup-pastry-tart"
+  | "cake"
+  | "sweets"
+  | "biscuits-toast"
+  | "others";
+
+export type CategoryType = {
+  name: string;
+  slug: CategorySlugType;
+  src: string;
+  srcSet: string;
+};
+
+export const CATEGORIES: CategoryType[] = [
   {
     name: "Pastry, Cup Pastry & Tart",
     slug: "pastry-cup-pastry-tart",

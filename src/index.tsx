@@ -1,14 +1,13 @@
+import { createTheme, CssBaseline, ThemeProvider } from "@material-ui/core";
+import { teal } from "@material-ui/core/colors";
 import React from "react";
 import ReactDOM from "react-dom";
-import { BrowserRouter } from "react-router-dom";
 import { Provider } from "react-redux";
-import { createTheme, CssBaseline, ThemeProvider } from "@material-ui/core";
-import { deepPurple } from "@material-ui/core/colors";
-
-import store from "./store";
+import { BrowserRouter } from "react-router-dom";
 import App from "./App";
 import { globalStyle } from "./index.style";
 import reportWebVitals from "./reportWebVitals";
+import store from "./store";
 
 const theme = createTheme({
   typography: {
@@ -18,7 +17,7 @@ const theme = createTheme({
     MuiCssBaseline: globalStyle,
   },
   palette: {
-    primary: { main: deepPurple[500] },
+    primary: { main: teal[500] },
   },
 });
 

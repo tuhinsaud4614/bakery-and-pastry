@@ -1,9 +1,11 @@
 import { createStyles, makeStyles, Theme } from "@material-ui/core";
+import { green } from "@material-ui/core/colors";
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
     root: {
-      marginTop: theme.spacing(2),
+      marginTop: theme.spacing(3),
+      background: green["50"],
     },
     title: {
       textTransform: "uppercase",

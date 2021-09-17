@@ -7,24 +7,15 @@ import {
   Typography,
 } from "@material-ui/core";
 import { Link, useHistory } from "react-router-dom";
+import { convertSlugToTitle, IProduct } from "../../../../shared/constants";
 import useStyles from "./index.style";
 
 interface Props {
-  title: string;
-  price: number;
-  slug: string;
-  category: string;
-  img: string;
-  featured?: boolean;
+  product: IProduct;
 }
 
 const ProductCard = ({
-  category,
-  featured,
-  img,
-  price,
-  slug,
-  title,
+  product: { category, featured, price, image, id, title },
 }: Props) => {
   const classes = useStyles();
   const { push } = useHistory();
@@ -39,24 +30,24 @@ const ProductCard = ({
           component="span"
         />
       )}
-      <CardActionArea onClick={() => push(`/product/${slug}`)}>
+      <CardActionArea onClick={() => push(`/product/${id}`)}>
         <CardMedia
           component="img"
           title={title}
-          image={img}
+          image={image.src}
           width={150}
           height={100}
-          style={{ height: "auto" }}
+          style={{ height: "auto", maxHeight: "155px" }}
         />
       </CardActionArea>
       <CardContent className={classes.content}>
-        <Link to={`/category/${slug}`} className={classes.category}>
-          {category}
+        <Link to={`/category/${category}`} className={classes.category}>
+          {convertSlugToTitle(category)}
         </Link>
-        <Link to={`/product/${slug}`} className={classes.title}>
+        <Link to={`/product/${id}`} className={classes.title}>
           {title}
         </Link>
-        <Typography variant="h6" component="h3" className={classes.price}>
+        <Typography variant="body1" component="h3" className={classes.price}>
           {price}৳
         </Typography>
       </CardContent>

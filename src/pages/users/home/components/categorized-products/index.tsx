@@ -1,6 +1,9 @@
-import { Box, Grid, Typography } from "@material-ui/core";
-import { CATEGORIES } from "../../../../../shared/constants";
+import { Grid } from "@material-ui/core";
+import { useAppSelector } from "../../../../../store";
 import ProductCard from "../../../components/product-card";
+import ProductsContainer, {
+  ProductsLoading,
+} from "../../../components/products-container";
 import useStyles from "./index.style";
 
 interface Props {
@@ -10,25 +13,30 @@ interface Props {
 
 const CategorizedProducts = ({ title, slug }: Props) => {
   const classes = useStyles();
+
+  const { error, data, status } = useAppSelector(
+    (state) => state.usersAllProducts
+  );
+
+  if (status === "pending") {
+    return <ProductsLoading title={title} count={4} />;
+  }
+
+  const newData = data.filter((product) => product.category === slug);
+  if (data.length === 0 || newData.length === 0 || error) {
+    return null;
+  }
+
   return (
-    <Box className={classes.root}>
-      <Typography component="h3" variant="body1" className={classes.title}>
-        {title}
-      </Typography>
+    <ProductsContainer title={title}>
       <Grid container spacing={2} className={classes.items}>
-        {CATEGORIES.map((category) => (
-          <Grid key={category.slug} item xs={6} sm={4} md={3}>
-            <ProductCard
-              img={category.src}
-              category={title}
-              slug={slug}
-              title="BLUEBERRY CUP"
-              price={140}
-            />
+        {newData.slice(0, 4).map((product) => (
+          <Grid key={product.id} item xs={6} sm={4} md={3}>
+            <ProductCard product={product} />
           </Grid>
         ))}
       </Grid>
-    </Box>
+    </ProductsContainer>
   );
 };
 
