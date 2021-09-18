@@ -1,6 +1,6 @@
 import { Grid } from "@material-ui/core";
 import { Alert, AlertTitle } from "@material-ui/lab";
-import { limit, where } from "firebase/firestore";
+import { limit, orderBy, where } from "firebase/firestore";
 import { useEffect } from "react";
 import { useParams } from "react-router";
 import { useAppDispatch, useAppSelector } from "../../../../../store";
@@ -28,6 +28,7 @@ const RelatedProducts = () => {
       const asyncFunc = async () => {
         await rdxDispatch(
           fetchUsersAllProducts([
+            orderBy("createdAt", "desc"),
             where("category", "==", categorySlug),
             limit(8),
           ])

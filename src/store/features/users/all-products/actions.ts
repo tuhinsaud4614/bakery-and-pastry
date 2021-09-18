@@ -1,6 +1,5 @@
 import { QueryConstraint } from "@firebase/firestore";
 import { createAsyncThunk } from "@reduxjs/toolkit";
-import { orderBy } from "firebase/firestore";
 import { ReduxErrorType, USERS_ALL_PRODUCTS_FETCHING } from "../..";
 import { fetchingProductsByQuery } from "../../../../services/users/products";
 import { IProduct } from "../../../../shared/constants";
@@ -14,7 +13,7 @@ export const fetchUsersAllProducts = createAsyncThunk<
   }
 >(USERS_ALL_PRODUCTS_FETCHING, async (queriesConst, { rejectWithValue }) => {
   try {
-    let qConst: QueryConstraint[] = [orderBy("createdAt", "desc")];
+    let qConst: QueryConstraint[] = [];
 
     if (queriesConst) {
       qConst = [...qConst, ...queriesConst];

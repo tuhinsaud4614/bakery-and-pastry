@@ -1,6 +1,7 @@
 import { where } from "@firebase/firestore";
 import { Grid } from "@material-ui/core";
 import { Alert, AlertTitle } from "@material-ui/lab";
+import { orderBy } from "firebase/firestore";
 import { useEffect, useMemo } from "react";
 import { useParams } from "react-router-dom";
 import others300 from "../../../images/others-300w.jpeg";
@@ -26,7 +27,10 @@ const Category = () => {
   useEffect(() => {
     (async () => {
       await rdxDispatch(
-        fetchUsersAllProducts([where("category", "==", slug)])
+        fetchUsersAllProducts([
+          orderBy("createdAt", "desc"),
+          where("category", "==", slug),
+        ])
       ).unwrap();
     })();
 

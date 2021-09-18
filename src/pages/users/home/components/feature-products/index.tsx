@@ -1,6 +1,7 @@
 import { where } from "@firebase/firestore";
 import { Box, Grid } from "@material-ui/core";
 import { Alert, AlertTitle, Pagination } from "@material-ui/lab";
+import { orderBy } from "firebase/firestore";
 import { useEffect, useState } from "react";
 import { useAppDispatch, useAppSelector } from "../../../../../store";
 import { fetchUsersAllProducts } from "../../../../../store/features/users/all-products/actions";
@@ -25,7 +26,10 @@ const FeatureProducts = () => {
   useEffect(() => {
     (async () => {
       await rdxDispatch(
-        fetchUsersAllProducts([where("featured", "==", true)])
+        fetchUsersAllProducts([
+          orderBy("createdAt", "desc"),
+          where("featured", "==", true),
+        ])
       ).unwrap();
     })();
 
