@@ -26,6 +26,9 @@ const useStyles = makeStyles((theme: Theme) =>
     items: {
       paddingTop: theme.spacing(2),
     },
+    alert: {
+      marginTop: theme.spacing(3),
+    },
   })
 );
 

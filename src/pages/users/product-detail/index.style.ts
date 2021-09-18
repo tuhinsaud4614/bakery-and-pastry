@@ -18,6 +18,7 @@ const useStyles = makeStyles((theme: Theme) =>
     title: {
       ...theme.typography.body2,
       overflowWrap: "break-word",
+      textTransform: "capitalize",
       [theme.breakpoints.up("sm")]: {
         ...theme.typography.h4,
       },

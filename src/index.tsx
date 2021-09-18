@@ -11,7 +11,7 @@ import store from "./store";
 
 const theme = createTheme({
   typography: {
-    fontFamily: "Raleway, Arial",
+    fontFamily: "Raleway, Arial, sans-serif",
   },
   overrides: {
     MuiCssBaseline: globalStyle,

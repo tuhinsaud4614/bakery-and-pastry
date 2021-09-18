@@ -54,7 +54,7 @@ const FeatureProducts = () => {
   if (data.length === 0) {
     return (
       <ProductsContainer title="Features Products">
-        <Alert severity="success" style={{ borderRadius: "0" }}>
+        <Alert severity="warning" style={{ borderRadius: "0" }}>
           <AlertTitle>No Product Found</AlertTitle>
           There is no featured product
         </Alert>

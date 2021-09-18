@@ -24,7 +24,7 @@ export const fetchUsersAllProducts = createAsyncThunk<
     return data;
   } catch (err) {
     return rejectWithValue({
-      title: "All products Fetching failed",
+      title: "Products Fetching failed",
       message: "There is problem to load data",
     } as ReduxErrorType);
   }

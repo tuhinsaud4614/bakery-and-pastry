@@ -1,15 +1,20 @@
 import { createStyles, makeStyles, Theme } from "@material-ui/core";
+import { green } from "@material-ui/core/colors";
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
     root: {
+      backgroundColor: green["50"],
+      [theme.breakpoints.down("xs")]: {
+        height: "inherit",
+      },
       [theme.breakpoints.up("sm")]: {
         border: `1px solid ${theme.palette.divider}`,
         width: theme.spacing(33),
       },
     },
     title: {
-      background: theme.palette.divider,
+      background: green["A100"],
       textTransform: "uppercase",
       fontWeight: 600,
       padding: `${theme.spacing()}px ${theme.spacing(2)}px`,
@@ -19,7 +24,11 @@ const useStyles = makeStyles((theme: Theme) =>
       marginTop: theme.spacing(),
     },
     item: {
-      ...theme.typography.h6,
+      fontWeight: theme.typography.fontWeightBold,
+      ...theme.typography.body1,
+      [theme.breakpoints.up("sm")]: {
+        ...theme.typography.h6,
+      },
       display: "block",
       textDecoration: "none",
       color: theme.palette.grey[500],

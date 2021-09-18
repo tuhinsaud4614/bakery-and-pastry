@@ -11,6 +11,8 @@ const ShareLinks = () => {
       <Tooltip title="Share on Facebook" aria-label="facebook" arrow>
         <IconButton
           aria-label="facebook"
+          target="_blank"
+          rel="noreferrer"
           href={`https://www.facebook.com/sharer.php?u=${window.location.href}`}
           className={classNames(styles.btn, styles.fbBtn)}
         >
@@ -20,6 +22,8 @@ const ShareLinks = () => {
       <Tooltip title="Share on Twitter" aria-label="twitter" arrow>
         <IconButton
           aria-label="twitter"
+          target="_blank"
+          rel="noreferrer"
           href="https://m.facebook.com/"
           className={classNames(styles.btn, styles.twBtn)}
         >
@@ -29,6 +33,8 @@ const ShareLinks = () => {
       <Tooltip title="Share on Instagram" aria-label="twitter" arrow>
         <IconButton
           aria-label="instagram"
+          target="_blank"
+          rel="noreferrer"
           href="https://m.facebook.com/"
           className={classNames(styles.btn, styles.inBtn)}
         >

@@ -1,40 +1,80 @@
 import { Box, Button, Divider, Grid, Typography } from "@material-ui/core";
-import { Redirect, useParams } from "react-router";
-import ROUTES from "../../../routes/constants";
+import { useEffect } from "react";
+import { useParams } from "react-router-dom";
 import Carousel from "../../../shared/components/carousel";
-import { CATEGORIES } from "../../../shared/constants";
+import { useAppDispatch, useAppSelector } from "../../../store";
+import { fetchUsersSingleProduct } from "../../../store/features/users/single-product/actions";
+import { removeProduct } from "../../../store/features/users/single-product/index.slice";
 import Wrapper from "../components/Wrapper";
 import RelatedProducts from "./components/related-products";
 import ShareLinks from "./components/share-links";
+import ProductDetailSkeleton from "./components/skeleton";
 import useStyles from "./index.style";
 
 const Product = () => {
   const styles = useStyles();
+  const { productId } =
+    useParams<{ categorySlug?: string; productId?: string }>();
+
+  const { error, product, status } = useAppSelector(
+    (state) => state.usersSingleProduct
+  );
+  const rdxDispatch = useAppDispatch();
+
+  useEffect(() => {
+    if (productId) {
+      const asyncProduct = async () => {
+        await rdxDispatch(fetchUsersSingleProduct(productId)).unwrap();
+      };
+
+      asyncProduct();
+    }
+    return () => {
+      rdxDispatch(removeProduct());
+    };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [rdxDispatch]);
+
+  if (status === "pending") {
+    return <ProductDetailSkeleton />;
+  }
+
+  if (error) {
+    return <p>error</p>;
+  }
+
+  if (!product) {
+    return <p>hello</p>;
+  }
+
   return (
     <Grid spacing={2} container>
       <Grid item xs={12} sm={6} md={5} className={styles.imageView}>
         <Carousel classes={{ root: styles.sliders }} actionBtn>
           <Carousel.Item>
             <img
-              src={CATEGORIES[0].src}
-              alt={CATEGORIES[0].name}
-              title={CATEGORIES[0].name}
-              srcSet={CATEGORIES[0].srcSet}
+              src={product.image.src}
+              alt={product.title}
+              title={product.title}
+              width="150"
+              height="300"
             />
           </Carousel.Item>
         </Carousel>
       </Grid>
       <Grid item xs={12} sm={6} md={7} style={{ overflow: "hidden" }}>
         <Typography className={styles.title} component="h1" gutterBottom>
-          MIX-BISCUIT (BABY+PLAIN+STAR) 300 gm
+          {product.title}
         </Typography>
         <Typography variant="h6" component="h6" gutterBottom>
-          250৳
+          {product.price}৳
         </Typography>
         <Divider light />
         <Box display="flex" alignItems="center" my={2}>
           <Button
-            href="https://www.facebook.com/"
+            href={product.link}
+            target="_blank"
+            rel="noreferrer"
             variant="outlined"
             color="secondary"
           >
@@ -61,12 +101,6 @@ Product.displayName = "Product";
 
 // Product detail
 const ProductDetail = () => {
-  const { id } = useParams<{ id?: string }>();
-
-  if (!id) {
-    return <Redirect to={ROUTES.user.home.path} />;
-  }
-
   return (
     <Wrapper hideSidebar>
       <Product />

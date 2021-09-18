@@ -23,6 +23,8 @@ const UserFooter = () => {
         >
           Stay with{" "}
           <a
+            target="_blank"
+            rel="noreferrer"
             href="https://m.facebook.com/"
             className={classes.link}
             aria-label="facebook-page"
@@ -97,6 +99,8 @@ const UserFooter = () => {
             <IconButton
               aria-label="facebook"
               href="https://m.facebook.com/"
+              target="_blank"
+              rel="noreferrer"
               className={classNames(classes.btn, classes.fbBtn)}
             >
               <Facebook />
@@ -105,7 +109,9 @@ const UserFooter = () => {
           <Tooltip title="Visit on Twitter" aria-label="twitter" arrow>
             <IconButton
               aria-label="twitter"
-              href="https://m.facebook.com/"
+              href="https://m.twitter.com/"
+              target="_blank"
+              rel="noreferrer"
               className={classNames(classes.btn, classes.twBtn)}
             >
               <Twitter />
@@ -114,7 +120,9 @@ const UserFooter = () => {
           <Tooltip title="Visit on Instagram" aria-label="instagram" arrow>
             <IconButton
               aria-label="instagram"
-              href="https://m.facebook.com/"
+              href="https://m.instagram.com/"
+              target="_blank"
+              rel="noreferrer"
               className={classNames(classes.btn, classes.inBtn)}
             >
               <Instagram />

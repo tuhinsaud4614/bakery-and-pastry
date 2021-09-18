@@ -4,6 +4,7 @@ import adminProductReducer from "./features/admin/product/index.slice";
 import searchReducer from "./features/search/index.slice";
 import settingsReducer from "./features/settings/index.slice";
 import usersAllProductsReducer from "./features/users/all-products/index.slice";
+import usersSingleProductReducer from "./features/users/single-product/index.slice";
 
 const store = configureStore({
   reducer: {
@@ -11,6 +12,7 @@ const store = configureStore({
     search: searchReducer,
     adminProduct: adminProductReducer,
     usersAllProducts: usersAllProductsReducer,
+    usersSingleProduct: usersSingleProductReducer,
   },
 });
 

@@ -38,7 +38,7 @@ const USER_ROUTES: UserRouteType = {
   },
   product: {
     name: "Category",
-    path: "/product/:id",
+    path: "/product/:categorySlug/:productId",
   },
 };
 

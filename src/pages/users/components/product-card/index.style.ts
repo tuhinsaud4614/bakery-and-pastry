@@ -23,9 +23,9 @@ const useStyles = makeStyles((theme: Theme) =>
     category: {
       textTransform: "capitalize",
       textDecoration: "none",
-      ...theme.typography.body2,
-      [theme.breakpoints.down("sm")]: {
-        ...theme.typography.body1,
+      ...theme.typography.caption,
+      [theme.breakpoints.up("sm")]: {
+        ...theme.typography.body2,
       },
       color: "#7B4B94",
       "&:hover": {
@@ -34,7 +34,7 @@ const useStyles = makeStyles((theme: Theme) =>
     },
     title: {
       ...theme.typography.body1,
-      [theme.breakpoints.down("sm")]: {
+      [theme.breakpoints.up("sm")]: {
         ...theme.typography.h6,
       },
       fontWeight: "bold",

@@ -13,5 +13,12 @@ export interface UserProductsState {
   error: ReduxErrorType;
 }
 
+export interface UserProductState {
+  product: IProduct | null;
+  status: ReduxStatusType;
+  error: ReduxErrorType;
+}
+
 // Users Action Types
 export const USERS_ALL_PRODUCTS_FETCHING = "users/all-products/fetching";
+export const USERS_SINGLE_PRODUCT_FETCHING = "users/single-products/fetching";
