@@ -79,7 +79,7 @@ const Search = () => {
         sideChild={
           <Box className={styles.sideChild}>
             {data.length === 0 && (
-              <Alert severity="warning">No searched products were found.</Alert>
+              <Alert severity="warning">No searched product were found.</Alert>
             )}
           </Box>
         }

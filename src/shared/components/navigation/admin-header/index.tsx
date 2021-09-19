@@ -1,11 +1,12 @@
-import { AppBar, Box, IconButton, Toolbar, Tooltip } from "@material-ui/core";
-import { ExitToApp, Menu } from "@material-ui/icons";
+import { AppBar, Box, IconButton, Toolbar } from "@material-ui/core";
+import { Menu } from "@material-ui/icons";
 import classNames from "classnames";
 import ROUTES from "../../../../routes/constants";
 import { useAppDispatch, useAppSelector } from "../../../../store";
 import { toggleAdminMenu } from "../../../../store/features/settings/index.slice";
 import AppLogo from "../../app-logo";
 import useStyles from "./index.style";
+import LogoutButton from "./logout-button";
 
 const AdminHeader = () => {
   const styles = useStyles();
@@ -34,11 +35,7 @@ const AdminHeader = () => {
           alignItems="center"
           justifyContent="flex-end"
         >
-          <Tooltip title="Logout from admin" aria-label="logout" arrow>
-            <IconButton color="inherit" aria-label="logout">
-              <ExitToApp />
-            </IconButton>
-          </Tooltip>
+          <LogoutButton />
         </Box>
       </Toolbar>
     </AppBar>

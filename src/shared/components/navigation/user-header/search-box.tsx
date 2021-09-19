@@ -39,7 +39,6 @@ const SearchBox = () => {
   return (
     <div className={styles.search}>
       <InputBase
-        type="search"
         inputRef={ref}
         onKeyPress={pressHandler}
         placeholder="Search…"

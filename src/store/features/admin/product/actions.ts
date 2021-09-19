@@ -101,12 +101,12 @@ export const addAdminProduct = createAsyncThunk<
       const imageUri = await getDownloadURL(snapshot.ref);
 
       const addSnapshot = await addDoc(collection(fireStore, "products"), {
-        category,
+        category: category.toLowerCase(),
         featured,
         image: { name: snapshot.metadata.name, src: imageUri },
         link,
         price,
-        title,
+        title: title.toLowerCase().replace(/\s+/g, " "),
         createdAt: serverTimestamp(),
       });
 
@@ -218,8 +218,8 @@ export const editAdminProduct = createAsyncThunk<
 
     const updatingRef = doc(fireStore, "products", product.id);
     await updateDoc(updatingRef, {
-      title: product.title,
-      category: product.category,
+      title: product.title.toLowerCase().replace(/\s+/g, " "),
+      category: product.category.toLowerCase(),
       link: product.link,
       price: product.price,
       featured: product.featured,
