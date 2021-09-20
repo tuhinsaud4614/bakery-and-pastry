@@ -8,8 +8,8 @@ const initialState: State = {
   value: "",
 };
 
-const settingsSlice = createSlice({
-  name: "settings",
+const searchSlice = createSlice({
+  name: "search",
   initialState: initialState,
   reducers: {
     onSearch: (state, action: PayloadAction<string>) => {
@@ -18,6 +18,6 @@ const settingsSlice = createSlice({
   },
 });
 
-export const { onSearch } = settingsSlice.actions;
+export const { onSearch } = searchSlice.actions;
 
-export default settingsSlice.reducer;
+export default searchSlice.reducer;

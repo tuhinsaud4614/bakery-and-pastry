@@ -1,41 +1,38 @@
 import { IconButton, Snackbar, Tooltip } from "@material-ui/core";
 import { ExitToApp } from "@material-ui/icons";
 import { Alert } from "@material-ui/lab";
-import { Fragment, memo } from "react";
-import { useAppDispatch, useAppSelector } from "../../../../store";
-import { adminAuthOut } from "../../../../store/features/admin/auth/actions";
-import { clearAuthError } from "../../../../store/features/admin/auth/index.slice";
+import { getAuth, signOut } from "firebase/auth";
+import { Fragment, memo, useState } from "react";
 
 const LogoutButton = () => {
-  const { status, error, user } = useAppSelector((state) => state.adminAuth);
-  const rdxDispatch = useAppDispatch();
+  const [error, setError] = useState<string | null>(null);
 
   const logoutHandler = async () => {
-    await rdxDispatch(adminAuthOut());
+    try {
+      const auth = getAuth();
+      await signOut(auth);
+    } catch (err) {
+      setError("Logout failed!");
+    }
   };
   return (
     <Fragment>
       <Snackbar
         onClose={(_, reasons) => {
           if (reasons === "timeout") {
-            rdxDispatch(clearAuthError());
+            setError(null);
           }
         }}
         autoHideDuration={4000}
         anchorOrigin={{ vertical: "top", horizontal: "right" }}
-        open={!!error && !!user}
+        open={!!error}
       >
         <Alert severity="success" variant="filled">
-          {error?.message}
+          {error}
         </Alert>
       </Snackbar>
       <Tooltip title="Logout from admin" aria-label="logout" arrow>
-        <IconButton
-          color="inherit"
-          aria-label="logout"
-          onClick={logoutHandler}
-          disabled={status === "pending" && !!user}
-        >
+        <IconButton color="inherit" aria-label="logout" onClick={logoutHandler}>
           <ExitToApp />
         </IconButton>
       </Tooltip>

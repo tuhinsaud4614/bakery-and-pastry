@@ -1,13 +1,13 @@
 import { Container, Paper, TextField } from "@material-ui/core";
 import { Alert, AlertTitle } from "@material-ui/lab";
+import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
 import { Formik, FormikHelpers } from "formik";
-import { Link, useHistory } from "react-router-dom";
+import { useState } from "react";
+import { Link } from "react-router-dom";
 import logo from "../../../images/logo.svg";
 import ROUTES from "../../../routes/constants";
 import LoadingButton from "../../../shared/components/loading-button";
-import { useAppDispatch, useAppSelector } from "../../../store";
-import { adminAuth } from "../../../store/features/admin/auth/actions";
-import { clearAuthError } from "../../../store/features/admin/auth/index.slice";
+import { ReduxErrorType } from "../../../store/features";
 import useStyles from "./index.style";
 import { authSchema } from "./validation.schema";
 
@@ -18,22 +18,25 @@ interface IFormState {
 
 const Auth = () => {
   const styles = useStyles();
-  const { error } = useAppSelector((state) => state.adminAuth);
-  const rdxDispatch = useAppDispatch();
-  const history = useHistory();
+  const [error, setError] = useState<ReduxErrorType | null>(null);
+  // const history = useHistory();
 
   const onsubmitHandler = async (
     values: IFormState,
     { resetForm }: FormikHelpers<IFormState>
   ): Promise<any> => {
-    const resultAction = await rdxDispatch(
-      adminAuth({ email: values.username, password: values.password })
-    );
-    if (adminAuth.fulfilled.match(resultAction)) {
-      history.replace(ROUTES.admin.dashboard.path);
-      return;
+    try {
+      const auth = getAuth();
+      await signInWithEmailAndPassword(auth, values.username, values.password);
+      // history.replace(ROUTES.admin.dashboard.path);
+    } catch (error: any) {
+      let message = "Something went wrong";
+      if ("code" in error && error["code"] === "auth/user-not-found") {
+        message = "Username/password is incorrect!";
+      }
+      resetForm();
+      setError({ message: message, title: "Authentication Failed" });
     }
-    resetForm();
   };
 
   return (
@@ -43,9 +46,8 @@ const Auth = () => {
           <img src={logo} alt="logo" width="100" height="48" />
         </Link>
         {/* If any errors occurred */}
-
         {error && (
-          <Alert severity="error" onClose={() => rdxDispatch(clearAuthError())}>
+          <Alert severity="error" onClose={() => setError(null)}>
             {error.title && <AlertTitle>{error.title}</AlertTitle>}
             {error.message}
           </Alert>

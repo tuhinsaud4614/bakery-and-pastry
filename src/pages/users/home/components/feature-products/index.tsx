@@ -1,8 +1,7 @@
-import { where } from "@firebase/firestore";
 import { Box, Grid } from "@material-ui/core";
 import { Alert, AlertTitle, Pagination } from "@material-ui/lab";
 import { orderBy } from "firebase/firestore";
-import { useEffect, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { useAppDispatch, useAppSelector } from "../../../../../store";
 import { fetchUsersAllProducts } from "../../../../../store/features/users/all-products/actions";
 import { removeAllProducts } from "../../../../../store/features/users/all-products/index.slice";
@@ -26,10 +25,7 @@ const FeatureProducts = () => {
   useEffect(() => {
     (async () => {
       await rdxDispatch(
-        fetchUsersAllProducts([
-          orderBy("createdAt", "desc"),
-          where("featured", "==", true),
-        ])
+        fetchUsersAllProducts([orderBy("createdAt", "desc")])
       ).unwrap();
     })();
 
@@ -37,6 +33,13 @@ const FeatureProducts = () => {
       rdxDispatch(removeAllProducts());
     };
   }, [rdxDispatch]);
+
+  const products = useMemo(() => {
+    if (data.length) {
+      return data.filter((product) => product.featured);
+    }
+    return [];
+  }, [data]);
 
   if (status === "pending") {
     return (
@@ -69,7 +72,7 @@ const FeatureProducts = () => {
   return (
     <ProductsContainer title="Features Products">
       <Grid container spacing={2} className={classes.items}>
-        {data
+        {products
           .slice(
             (page - 1) * PRODUCT_PER_PAGE,
             (page - 1) * PRODUCT_PER_PAGE + PRODUCT_PER_PAGE

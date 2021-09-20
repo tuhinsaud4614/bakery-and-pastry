@@ -5,7 +5,7 @@ import Wrapper from "../pages/admin/components/wrapper";
 import PageNotFound from "../pages/page-not-found";
 import Loader from "../shared/components/loader";
 import { useAppDispatch, useAppSelector } from "../store";
-import { autoAuthentication } from "../store/features/admin/auth/index.slice";
+import { authStateChanged } from "../store/features/admin/auth/index.slice";
 import ROUTES from "./constants";
 
 const Auth = lazy(() => import("../pages/admin/auth"));
@@ -14,17 +14,43 @@ const Product = lazy(() => import("../pages/admin/product"));
 
 const AdminRoutes = () => {
   const rdxDispatch = useAppDispatch();
-  const { user } = useAppSelector((state) => state.adminAuth);
+  const { user, status } = useAppSelector((state) => state.adminAuth);
 
   useEffect(() => {
     const auth = getAuth();
-    const unsubscribe = onAuthStateChanged(auth, (user) => {
-      console.log(user);
+    const unsubscribe = onAuthStateChanged(auth, async (user) => {
+      if (!user) {
+        return rdxDispatch(
+          authStateChanged({ loading: "complete", user: null })
+        );
+      }
+
+      try {
+        rdxDispatch(authStateChanged({ loading: "pending", user: null }));
+        const token = await user.getIdToken();
+        rdxDispatch(
+          authStateChanged({
+            loading: "complete",
+            user: {
+              email: user.email || "",
+              refreshToken: user.refreshToken,
+              token: token,
+            },
+          })
+        );
+      } catch (error) {
+        return rdxDispatch(
+          authStateChanged({ loading: "complete", user: null })
+        );
+      }
     });
-    rdxDispatch(autoAuthentication());
 
     return unsubscribe;
   }, [rdxDispatch]);
+
+  if (status === "idle" || status === "pending") {
+    return <Loader />;
+  }
 
   return (
     <Suspense fallback={<Loader />}>

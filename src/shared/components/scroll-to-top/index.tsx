@@ -1,10 +1,12 @@
 import { Fab, Tooltip } from "@material-ui/core";
 import { KeyboardArrowUp } from "@material-ui/icons";
 import { useEffect, useState } from "react";
+import { useHistory } from "react-router";
 import useStyles from "./index.style";
 
 const ScrollToTop = ({ showBelow }: { showBelow: number }) => {
   const styles = useStyles();
+  const { listen } = useHistory();
   const [show, setShow] = useState<boolean>(false);
 
   const onClick = () => {
@@ -26,6 +28,12 @@ const ScrollToTop = ({ showBelow }: { showBelow: number }) => {
     window.addEventListener("scroll", onScrolling);
     return () => window.removeEventListener("scroll", onScrolling);
   }, [showBelow, show]);
+
+  useEffect(() => {
+    return listen(() => {
+      window.scrollTo({ top: 0 });
+    });
+  });
 
   return show ? (
     <Tooltip title="Scroll to top" aria-label="scroll to top" arrow>
