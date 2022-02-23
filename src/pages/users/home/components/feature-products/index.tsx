@@ -58,7 +58,7 @@ const FeatureProducts = () => {
     );
   }
 
-  if (data.length === 0) {
+  if (products.length === 0) {
     return (
       <ProductsContainer title="Features Products">
         <Alert severity="warning" style={{ borderRadius: "0" }}>
@@ -83,7 +83,7 @@ const FeatureProducts = () => {
             </Grid>
           ))}
       </Grid>
-      {data.length > PRODUCT_PER_PAGE && (
+      {products.length > PRODUCT_PER_PAGE && (
         <Box
           display="flex"
           justifyContent="center"
@@ -94,7 +94,7 @@ const FeatureProducts = () => {
             onChange={(e, value) => {
               setPage(value);
             }}
-            count={Math.ceil(data.length / PRODUCT_PER_PAGE)}
+            count={Math.ceil(products.length / PRODUCT_PER_PAGE)}
             variant="outlined"
             shape="rounded"
           />

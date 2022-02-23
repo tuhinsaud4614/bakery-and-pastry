@@ -22,8 +22,6 @@ export async function fetchingProductsByQuery(qu: QueryConstraint[]) {
     });
     return data;
   } catch (error) {
-    console.log(error);
-
     throw error;
   }
 }
